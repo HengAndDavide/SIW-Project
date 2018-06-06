@@ -30,9 +30,9 @@ public class AllievoService {
 	}
 
 	public Allievo findById(Long id) {
-		Optional<Allievo> Allievo = this.AllievoRepository.findById(id);
-		if (Allievo.isPresent())
-			return Allievo.get();
+		Optional<Allievo> allievo = this.AllievoRepository.findById(id);
+		if (allievo.isPresent())
+			return allievo.get();
 		else
 			return null;
 	}
@@ -58,7 +58,15 @@ public class AllievoService {
 			return false;
 	}
 
-	public List<Allievo> findByNomeAndCognome(String nome, String cognome) {
+	public Allievo findByNomeAndCognome(String nome, String cognome) {
 		return this.AllievoRepository.findByNomeAndCognome(nome, cognome);
+	}
+
+	public Allievo findByEmail(String email) {
+		Optional<Allievo> allievo = this.AllievoRepository.findByEmail(email);
+		 if (allievo.isPresent())
+				return allievo.get();
+			else
+				return null;
 	}
 }

@@ -20,8 +20,8 @@
 			</table>
 		</div>
 		<br>
-		<a th:href="@{/addAllievo}">Inserisci Nuovo Allievo</a>
-		<a th:href="index">Home</a>
+		<form th:action="@{/addAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
+		<form th:action="@{/home}" method="GET"><button type="submit">Home</button></form>
 	</div>
 </body>
 </html>

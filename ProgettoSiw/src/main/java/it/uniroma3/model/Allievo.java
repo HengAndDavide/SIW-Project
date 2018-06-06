@@ -41,6 +41,12 @@ public class Allievo {
 
 	public Allievo() {
 	}
+	
+	public Allievo(String nome, String cognome) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+	}
 
 	public Allievo(String nome, String cognome, String email, String telefono, String luogoNascita) {
 		super();

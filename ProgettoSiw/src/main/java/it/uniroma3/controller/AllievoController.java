@@ -1,5 +1,7 @@
 package it.uniroma3.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.controller.validator.AllievoValidator;
 import it.uniroma3.model.Allievo;
@@ -30,6 +33,11 @@ public class AllievoController {
 		return "allievoList";
 	}
 
+	@RequestMapping("/home")
+	public String home() {
+		return "index.html";
+	}
+
 	@RequestMapping("/addAllievo")
 	public String addAllievo(Model model) {
 		model.addAttribute("allievo", new Allievo());
@@ -42,17 +50,23 @@ public class AllievoController {
 		return "showAllievo";
 	}
 
-	@RequestMapping(value = "/findAllievo", method = RequestMethod.GET)
-	public String cercaAllievo(Model model) {
-		model.addAttribute("allievo", new Allievo());
+	@RequestMapping("/findAllievo")
+	public String cercaAllievo() {
 		return "findAllievo";
 	}
 
-	@RequestMapping(value = "/trovaAllievo", method = RequestMethod.GET)
-	public String trovaAllievo(@PathVariable("nome") String nome, @PathVariable("cognome") String cognome,
-			Model model) {
-		model.addAttribute("allievo", this.allievoService.findByNomeAndCognome(nome, cognome));
-		return "showAllievo";
+	@RequestMapping(value = "/trovaAllievo")
+	public String trovaAllievo(@RequestParam("email") String email, Model model) {
+
+		Allievo allievo = this.allievoService.findByEmail(email);
+
+		if (allievo == null) {
+			model.addAttribute("notexists", "Allievo non esiste");
+			return "findAllievo";
+		} else {
+			model.addAttribute("allievo", allievo);
+			return "showAllievo";
+		}
 	}
 
 	@RequestMapping(value = "/allievo", method = RequestMethod.POST)
