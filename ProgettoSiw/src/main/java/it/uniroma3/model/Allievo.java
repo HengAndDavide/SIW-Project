@@ -129,4 +129,47 @@ public class Allievo {
 		return id;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
+		result = prime * result + ((dataNascita == null) ? 0 : dataNascita.hashCode());
+		result = prime * result + ((luogoNascita == null) ? 0 : luogoNascita.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Allievo other = (Allievo) obj;
+		if (cognome == null) {
+			if (other.cognome != null)
+				return false;
+		} else if (!cognome.equals(other.cognome))
+			return false;
+		if (dataNascita == null) {
+			if (other.dataNascita != null)
+				return false;
+		} else if (!dataNascita.equals(other.dataNascita))
+			return false;
+		if (luogoNascita == null) {
+			if (other.luogoNascita != null)
+				return false;
+		} else if (!luogoNascita.equals(other.luogoNascita))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+
 }

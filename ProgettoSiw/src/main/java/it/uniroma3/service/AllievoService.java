@@ -57,4 +57,8 @@ public class AllievoService {
 		else
 			return false;
 	}
+
+	public List<Allievo> findByNomeAndCognome(String nome, String cognome) {
+		return this.AllievoRepository.findByNomeAndCognome(nome, cognome);
+	}
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Cerca Allievo</h4>
+	</div>
+	<form th:action="@{/trovaAllievo}" method="GET">
+		<table>
+			<tr>
+				<td>Nome :</td>
+				<td><input type="text" th:field="*{nome}" /></td>
+			</tr>
+			<tr>
+				<td>Cognome :</td>
+				<td><input type="text" th:field="*{cognome}" /></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

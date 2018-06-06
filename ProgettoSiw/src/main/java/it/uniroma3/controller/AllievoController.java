@@ -42,6 +42,19 @@ public class AllievoController {
 		return "showAllievo";
 	}
 
+	@RequestMapping(value = "/findAllievo", method = RequestMethod.GET)
+	public String cercaAllievo(Model model) {
+		model.addAttribute("allievo", new Allievo());
+		return "findAllievo";
+	}
+
+	@RequestMapping(value = "/trovaAllievo", method = RequestMethod.GET)
+	public String trovaAllievo(@PathVariable("nome") String nome, @PathVariable("cognome") String cognome,
+			Model model) {
+		model.addAttribute("allievo", this.allievoService.findByNomeAndCognome(nome, cognome));
+		return "showAllievo";
+	}
+
 	@RequestMapping(value = "/allievo", method = RequestMethod.POST)
 	public String nuovoAllievo(@Valid @ModelAttribute("allievo") Allievo allievo, Model model,
 			BindingResult bindingResult) {

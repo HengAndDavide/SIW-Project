@@ -21,28 +21,18 @@ public class Progetto2018Application {
 		SpringApplication.run(Progetto2018Application.class, args);
 	}
 
-	// @PostConstruct
-	// public void init() {
-	// Customer customer = new Customer("Paolo", "Merialdo", "Genova");
-	// customerService.save(customer);
-	// for(Customer c : customerService.findByCity("Genova")) {
-	// System.out.println(c.getName());
-	// }
-	// }
-
+	@SuppressWarnings("deprecation")
 	@PostConstruct
 	public void init() {
 		Allievo allievo = new Allievo();
-		allievo.setNome("Davide");
-		allievo.setCognome("Vergari");
-		allievo.setDataNascita(new Date());
-		allievo.setEmail("davidevergari@gmail.it");
-		allievo.setLuogoNascita("Roma");
+		Date data = new Date(1993-1900, 03-1, 05);
+		allievo.setNome("Heng");
+		allievo.setCognome("Ge");
+		allievo.setDataNascita(data);
+		allievo.setEmail("geheng@gmail.it");
+		allievo.setLuogoNascita("Cina");
 		allievo.setTelefono("06432423");
 		allievoService.save(allievo);
-		for (Allievo c : allievoService.findByLuogoNascita("Roma")) {
-			System.out.println(c.getNome());
-		}
 	}
 
 }
