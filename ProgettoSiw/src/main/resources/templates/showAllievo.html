@@ -26,9 +26,10 @@
 			Luogo di Nascita : <span th:text="${allievo.luogoNascita}"></span>
 		</div>
 		<br>
-		<a th:href="@{/addAllievo}">Inserisci Nuovo Allievo</a>
-		<a th:href="@{/allievi}">Lista Tutti Allievi</a>
-		<a href="">Home</a>
+		<form th:action="@{/modificaAllievo}"><button type="submit">Modifica Allievo</button></form>
+		<form th:action="@{/addAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
+		<form th:action="@{/allievi}"><button type="submit">Lista Tutti Allievi</button></form>
+		<form th:action="@{/home}" method="GET"><button type="submit">Home</button></form>
 	</div>
 </body>
 </html>

@@ -1,7 +1,5 @@
 package it.uniroma3.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +65,18 @@ public class AllievoController {
 			model.addAttribute("allievo", allievo);
 			return "showAllievo";
 		}
+	}
+
+	@RequestMapping(value = "/modificaAllievo", method = RequestMethod.POST)
+	public String modificaAllievo(@Valid @ModelAttribute("allievo") Allievo allievoTrovato, Model model) {
+		
+		model.addAttribute("allievo", new Allievo());
+		return "gestioneAllievo";
+		
+//		model.addAttribute("allievoTrovato", allievoTrovato);
+//		this.allievoService.update(allievoTrovato);
+//		model.addAttribute("allievo", allievoTrovato);
+//		return "gestioneAllievo";
 	}
 
 	@RequestMapping(value = "/allievo", method = RequestMethod.POST)

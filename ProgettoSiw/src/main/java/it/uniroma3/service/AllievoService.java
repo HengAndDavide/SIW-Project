@@ -15,22 +15,22 @@ import it.uniroma3.repository.AllievoRepository;
 public class AllievoService {
 
 	@Autowired
-	private AllievoRepository AllievoRepository;
+	private AllievoRepository allievoRepository;
 
 	public Allievo save(Allievo Allievo) {
-		return this.AllievoRepository.save(Allievo);
+		return this.allievoRepository.save(Allievo);
 	}
 
 	public List<Allievo> findByLuogoNascita(String city) {
-		return this.AllievoRepository.findByLuogoNascita(city);
+		return this.allievoRepository.findByLuogoNascita(city);
 	}
 
 	public List<Allievo> findAll() {
-		return (List<Allievo>) this.AllievoRepository.findAll();
+		return (List<Allievo>) this.allievoRepository.findAll();
 	}
 
 	public Allievo findById(Long id) {
-		Optional<Allievo> allievo = this.AllievoRepository.findById(id);
+		Optional<Allievo> allievo = this.allievoRepository.findById(id);
 		if (allievo.isPresent())
 			return allievo.get();
 		else
@@ -50,7 +50,7 @@ public class AllievoService {
 	}
 
 	public boolean alreadyExists(Allievo Allievo) {
-		List<Allievo> Allievi = this.AllievoRepository.findByNomeAndCognomeAndLuogoNascita(Allievo.getNome(),
+		List<Allievo> Allievi = this.allievoRepository.findByNomeAndCognomeAndLuogoNascita(Allievo.getNome(),
 				Allievo.getCognome(), Allievo.getLuogoNascita());
 		if (Allievi.size() > 0)
 			return true;
@@ -59,14 +59,24 @@ public class AllievoService {
 	}
 
 	public Allievo findByNomeAndCognome(String nome, String cognome) {
-		return this.AllievoRepository.findByNomeAndCognome(nome, cognome);
+		return this.allievoRepository.findByNomeAndCognome(nome, cognome);
 	}
 
 	public Allievo findByEmail(String email) {
-		Optional<Allievo> allievo = this.AllievoRepository.findByEmail(email);
-		 if (allievo.isPresent())
-				return allievo.get();
-			else
-				return null;
+		Optional<Allievo> allievo = this.allievoRepository.findByEmail(email);
+		if (allievo.isPresent())
+			return allievo.get();
+		else
+			return null;
 	}
+
+	public void update(Allievo allievoTrovato) {
+		// allievoTrovato.setNome(nome);
+		// allievoTrovato.setCognome(cognome);
+		// allievoTrovato.setEmail(email);
+		// allievoTrovato.setDataNascita(dataNascita);
+		// allievoTrovato.setLuogoNascita(luogoNascita);
+		// allievoTrovato.setTelefono(telefono);
+	}
+	
 }
