@@ -1,6 +1,6 @@
 
 /* BackGround-Sfondo per pagina di log-in.*/
-#entirePage {
+body {
 	
     background: url(loginPicture.jpg);
     background-repeat: no-repeat;
