@@ -25,54 +25,66 @@ public class AllievoController {
 	@Autowired
 	private AllievoValidator validator;
 
-	@RequestMapping("/allievi")
-	public String allievi(Model model) {
-		model.addAttribute("allievi", this.allievoService.findAll());
-		return "allievoList";
-	}
-
-	@RequestMapping("/home")
+	@RequestMapping("/homeAllievo")
 	public String home() {
-		return "index.html";
+		return "allievo/gestioneAllievi.html";
 	}
-
-	@RequestMapping("/addAllievo")
-	public String addAllievo(Model model) {
+	//Inserisci Allievo metodo Supporto
+	@RequestMapping("/inserisciAllievo")
+	public String inserisciAllievo(Model model) {
 		model.addAttribute("allievo", new Allievo());
-		return "allievoForm";
+		return "allievo/allievoForm";
+	}
+	//Persistence Allievo
+	@RequestMapping(value = "/saveAllievo", method = RequestMethod.POST)
+	public String nuovoAllievo(@Valid @ModelAttribute("allievo") Allievo allievo, Model model,
+			BindingResult bindingResult) {
+		this.validator.validate(allievo, bindingResult);
+
+		if (this.allievoService.alreadyExists(allievo)) {
+			model.addAttribute("exists", "Allievo esiste gia'");
+			return "allievo/allievoForm";
+		} else {
+			if (!bindingResult.hasErrors()) {
+				this.allievoService.uppa(allievo);
+				this.allievoService.save(allievo);
+				model.addAttribute("listaAllievi", this.allievoService.findAll());
+				return "allievo/allievoList";
+			}
+		}
+		return "allievo/allievoForm";
 	}
 
-	@RequestMapping(value = "/allievo/{id}", method = RequestMethod.GET)
-	public String getAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
-		return "showAllievo";
-	}
-
-	@RequestMapping("/findAllievo")
+	//Ricerca Allievo metodo Supporto
+	@RequestMapping("/cercaAllievo")
 	public String cercaAllievo() {
-		return "findAllievo";
+		return "allievo/findAllievo";
 	}
-
-	@RequestMapping(value = "/trovaAllievo")
-	public String trovaAllievo(@RequestParam("email") String email, Model model) {
-
+	//Search Allievo Emal
+	@RequestMapping(value = "/findAllievo")
+	public String findAllievo(@RequestParam("email") String email, Model model) {
 		Allievo allievoTrovato = this.allievoService.findByEmail(email);
-
 		if (allievoTrovato == null) {
 			model.addAttribute("notexists", "Allievo non esiste");
-			return "findAllievo";
+			return "allievo/findAllievo";
 		} else {
 			model.addAttribute("allievoTrovato", allievoTrovato);
-			return "showAllievo";
+			return "allievo/showAllievo";
 		}
 	}
-
+	//Search Allievo tramite ID
+	@RequestMapping(value = "/findAllievoId/{id}", method = RequestMethod.GET)
+	public String findAllievo(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
+		return "allievo/showAllievo";
+	}
+	//Modifica Allievo tramite id Supporto
 	@RequestMapping(value = "/modificaAllievo/{id}", method = RequestMethod.GET)
 	public String modificaAllievo(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
-		return "gestioneAllievo";
+		return "allievo/mergeAllievo";
 	}
-
+	//Update Allievo tramite Id
 	@RequestMapping(value = "/updateAllievo/{id}", method = RequestMethod.POST)
 	public String updateAllievo(@PathVariable("id") Long id, @RequestParam("nome") String nome,
 			@RequestParam("cognome") String cognome, @RequestParam("email") String email,
@@ -81,32 +93,21 @@ public class AllievoController {
 				luogoNascita);
 		this.allievoService.save(allievo);
 		model.addAttribute("allievoTrovato", allievo);
-		return "showAllievo";
+		return "allievo/showAllievo";
+	}
+	
+	//Mostra Lista Allievi
+	@RequestMapping("/listaAllievi")
+	public String allievi(Model model) {
+		model.addAttribute("listaAllievi", this.allievoService.findAll());
+		return "allievo/allievoList";
 	}
 
+	//Delete Allievo tramite Id
 	@RequestMapping(value = "/cancellaAllievo/{id}", method = RequestMethod.GET)
 	public String cancelllaAllievo(@PathVariable("id") Long id, Model model) {
 		this.allievoService.delete(id);
-		return "deleteAllievo";
-	}
-
-	@RequestMapping(value = "/allievo", method = RequestMethod.POST)
-	public String nuovoAllievo(@Valid @ModelAttribute("allievo") Allievo allievo, Model model,
-			BindingResult bindingResult) {
-		this.validator.validate(allievo, bindingResult);
-
-		if (this.allievoService.alreadyExists(allievo)) {
-			model.addAttribute("exists", "Allievo esiste gia'");
-			return "allievoForm";
-		} else {
-			if (!bindingResult.hasErrors()) {
-				this.allievoService.uppa(allievo);
-				this.allievoService.save(allievo);
-				model.addAttribute("allievi", this.allievoService.findAll());
-				return "allievoList";
-			}
-		}
-		return "allievoForm";
+		return "allievo/deleteAllievo";
 	}
 
 }

@@ -10,7 +10,7 @@
 		<h4 class="title">Inserisci Allievo</h4>
 		<p th:text="${exists}"></p>
 	</div>
-	<form th:action="@{/allievo}" method="POST" th:object="${allievo}">
+	<form th:action="@{/saveAllievo}" method="POST" th:object="${allievo}">
 		<table>
 			<tr>
 				<td>Nome :</td>
@@ -22,6 +22,13 @@
 				<td><input type="text" th:field="*{cognome}" /></td>
 				<td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></td>
 			</tr>
+<!-- 
+			<tr>
+				<td>Data di Nascita :</td>
+				<td><input type="date" th:field="*{date}" /></td>
+				<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></td>
+			</tr>
+ -->
 			<tr>
 				<td>Email :</td>
 				<td><input type="text" th:field="*{email}" /></td>
@@ -35,13 +42,19 @@
 			<tr>
 				<td>Luogo di Nascita :</td>
 				<td><input type="text" th:field="*{luogoNascita}" /></td>
-				<td th:if="${#fields.hasErrors('luogoNascita')}" th:errors="*{luogoNascita}"></td>
+				<td th:if="${#fields.hasErrors('luogoNascita')}"
+					th:errors="*{luogoNascita}"></td>
 			</tr>
+
 			<tr>
-				<td><button type="submit">Registra Allievo</button></td>
+				<td><br>
+				<button type="submit">Registra Allievo</button></td>
 			</tr>
 		</table>
 	</form>
-	<form th:action="@{/home}"><button type="submit">Home</button></form>
+	<br>
+	<form th:action="@{/homeAllievo}">
+		<button type="submit">Gestione Allievi</button>
+	</form>
 </body>
 </html>

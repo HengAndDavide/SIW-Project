@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Lista Attivita</title>
+</head>
+<body>
+	<div>
+		<h4 class="title">Attivita</h4>
+		<div>
+			<table>
+				<tr>
+					<th>Nome : </th>
+				</tr>
+				<tr th:each="attivita : ${listaAttivita}">
+					<td><a th:href="@{'/findAttivitaId' + '/' + ${attivita.id}}">
+						<span th:text="${attivita.nome}"></span>
+						<span th:text="${attivita.cognome}"></span></a></td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<form th:action="@{/inserisciAttivita}"><button type="submit">Inserisci Nuovo Attivita</button></form>
+		<form th:action="@{/homeAttivita}" method="GET"><button type="submit">Gestione Attivita</button></form>
+	</div>
+</body>
+</html>

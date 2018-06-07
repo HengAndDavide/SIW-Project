@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Inserimento Attivita</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Inserisci Attivita</h4>
+		<p th:text="${exists}"></p>
+	</div>
+	<form th:action="@{/saveAttivita}" method="POST" th:object="${attivita}">
+		<table>
+			<tr>
+				<td>Descrizione :</td>
+				<td><input type="text" th:field="*{descrizione}" /></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></td>
+			</tr>
+			<tr>
+				<td>Prezzo :</td>
+				<td><input type="number" th:field="*{prezzo}" /></td>
+				<td th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}"></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Registra Attivita</button></td>
+			</tr>
+		</table>
+	</form>
+	<form th:action="@{/homeAttivita}"><button type="submit">Gestione Attivita</button></form>
+</body>
+</html>

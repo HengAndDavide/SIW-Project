@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>RIcerca Attivita</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Cerca Attivita</h4>
+		<p th:text="${notexists}"></p>
+	</div>
+	<form th:action="@{/findAttivita}" method="GET">
+		<table>
+			<tr>
+				<td>Descrizione :</td>
+				<td><input type="text" name="descrizione"/></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Cerca Attivita</button></td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<form th:action="@{/addAttivita}"><button type="submit">Inserisci Nuovo Attivita</button></form>
+	<form th:action="@{/homeAttivita}"><button type="submit">Gestione Attivita</button></form>
+</body>
+</html>

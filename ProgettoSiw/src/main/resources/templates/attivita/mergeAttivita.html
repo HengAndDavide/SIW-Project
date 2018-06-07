@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Modifica Attivita</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Attivita</h4>
+	</div>
+	<form th:action="@{'/updateAttivita' + '/' + ${attivitaTrovato.id}}" method="POST" th:object="${attivitaTrovato}">
+		<table>
+			<tr>
+				<td>Descrizione :</td>
+				<td><input type="text" th:field="*{descrizione}" value="${attivitaTrovato.descrizione}"/></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></td>
+			</tr>
+			<tr>
+				<td>Prezzo :</td>
+				<td><input type="number" th:field="*{prezzo}" value="${attivitaTrovato.prezzo}"/></td>
+				<td th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}"></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Update Attivita</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
