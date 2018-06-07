@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p th:text="'Hallo' + '!'" />
+    <form th:action="@{/addAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
+    <form th:action="@{/findAllievo}"><button type="submit">Cerca Allievo</button></form>
+    <form th:action="@{/allievi}"><button type="submit">Lista Tutti Allievi</button></form>
+</body>
+</html>
