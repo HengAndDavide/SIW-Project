@@ -1,0 +1,342 @@
+
+/* BackGround-Sfondo per pagina di log-in.*/
+#entirePage {
+	
+    background: url(loginPicture.jpg);
+    background-size: 100px 80px;
+    background-repeat: no-repeat;
+}
+
+
+
+ #nota {
+      position: relative;
+      left: 50%;
+      top: 0%;
+}
+
+
+
+
+#nota .edithome {
+      position: relative;
+      left: -300px;
+      top: 180px;
+      width: 10px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-size: 21px;
+      color: blu;
+      text-decoration: none;
+}
+
+
+#nota .editiscriviti {
+      position: relative;
+      left: 310px;
+      top: 234px;
+      width: 10px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-size: 21px;
+      color: blu;
+      text-decoration: none;
+}
+
+
+
+#nota .noiscrizione {
+      position: relative;
+      left: 110px;
+      top: 195px;
+      width: 200px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 21px;
+      color: black;
+}
+
+
+ #nota p {
+      position: relative;
+      top: 200px;
+      width: 380px;
+      left: 110px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      color: black;
+      text-align: justify;
+}
+
+
+#nota .leggiTermini {
+      position: relative;
+      left: 325px;
+      top: 190px;
+      width: 400px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-size: 16px;
+      color: green;
+      z-index:5;
+}
+
+
+/********************************/
+
+ #Utenti {
+      position: relative;
+      left: 50%;
+      top: 5px;
+}
+
+
+#Utenti .editcontatti {
+      position: relative;
+      left: -50px;
+      top: -300px;
+      width: 110px;
+      height: 108px;
+}
+
+
+
+/* definisce la larghezza e il padding top e left dei fields I TUOI DATI DI ACCESSO e EMAIL  */
+#Utenti body {
+  position: relative;
+  font-family: 'Palatino Linotype', serif;
+  margin-top: 190px;
+  max-width: 550px;
+  max-height: 100px;
+  padding: 50px 220px;
+}
+
+
+/* posiziona le righe di testo in corsivo */
+#Utenti p {
+  position: relative;  
+  left: -475px;
+  margin-top: 0px;	
+  margin-left: 0px;
+}
+
+
+
+#Utenti fieldset {
+  position: relative;  
+  left: -490px;
+  margin-bottom: 15px;
+  padding: 10px; 
+  width: 450px;
+}
+
+
+#Utenti legend {
+  padding: 0px 3px;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+
+
+#Utenti label {
+  width: 95px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+}
+
+
+#Utenti input, textarea {
+  width: 300px;
+}
+
+#Utenti textarea {
+  height: 300px;
+}
+
+
+#Utenti input[type=submit] {
+  width: 150px;
+  padding: 10px;
+}
+
+
+/*********************************************************/
+
+ #Recuperadati {
+      position: relative;
+      left: 50%;
+      top: -90px;
+}
+
+
+
+ #Recuperadati p {
+  position: relative;  
+  left: -475px;
+  margin-top: 0px;	
+  margin-left: 0px;
+  width: 450px;
+}
+
+
+/* definisce la larghezza e il padding top e left dei fields I TUOI DATI DI ACCESSO e EMAIL  */
+#Recuperadati body {
+  position: relative;
+  font-family: 'Palatino Linotype', serif;
+  margin-top: 190px;
+  max-width: 550px;
+  max-height: 100px;
+  padding: 50px 220px;
+}
+
+
+#Recuperadati fieldset{
+  position: relative;  
+  left: -490px;
+  margin-bottom: 15px;
+  padding: 10px;
+  position: relative;
+  width: 450px;
+}
+
+
+#Recuperadati label {
+  width: 95px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+}
+
+
+#Recuperadati input, textarea {
+  width: 300px;
+}
+
+#Recuperadati textarea {
+  height: 300px;
+}
+
+
+ #Recuperadati .button {
+      position: relative;
+      left: 0px;
+      top: -55px;
+      width: 100px;
+      font-family: Times;
+      font-style: normal;
+      font-size: 22px;
+      text-decoration: none;
+      background: white;
+      color: blu;
+      font-weight: normal;
+      border-radius: 20px 20px 20px 20px;
+      border-width: 1px;
+      border-style: normal;
+      z-index:5;
+}
+
+
+/*******************************************/
+
+ #verificadati {
+      position: relative;
+      left: 50%;
+      top: -200px;
+}
+
+
+
+/* definisce la larghezza e il padding top e left dei fields I TUOI DATI DI ACCESSO e EMAIL  */
+#verificadati body {
+  position: relative;
+  left: -150px;
+  top: -85px;
+  font-family: 'Palatino Linotype', serif;
+  margin-top: 190px;
+  max-width: 550px;
+  max-height: 100px;
+  padding: 50px 220px;
+}
+
+
+#verificadati fieldset{
+  margin-bottom: 15px;
+  padding: 10px;
+  position: relative;
+  width: 450px;
+}
+
+
+#verificadati label {
+  width: 95px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+}
+
+
+#verificadati input, textarea {
+  width: 300px;
+}
+
+#verificadati textarea {
+  height: 300px;
+}
+
+
+/* stile della label Modifica la tua password */
+#verificadati p {
+      position: relative;
+      left: -450px;
+      top: 85px;
+      width: 370px;
+      font-family: Times;
+      font-style: normal;
+      font-size: 16px;
+      font-weight:bold;
+      color: black;
+       text-align: justify;
+}
+
+
+/* stile del submit Cambia la tua password */
+#verificadati .accedi {
+      position: relative;
+      left: 0px;
+      top: -30px;
+      z-index:5;
+}
+
+
+#verificadati input[type=submit] {
+  width: 150px;
+  font-family: Times;
+  font-style: normal;
+  font-size: 12px;
+  font-weight:normal;
+  color: black;
+}
+
+/*********************************************************/
+
+
+
+
+
+/* presenta l'immagine di background della pagina Le Persone */	
+
+body {
+        background-image: url(LePersone.jpg);
+        background-repeat: no-repeat;
+        background-position: 50% 0%; 
+        position: relative; 
+}
+
+
+a:hover {
+     text-decoration: underline;
+}

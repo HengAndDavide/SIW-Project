@@ -1,0 +1,154 @@
+
+/* posiziona il testo di conferma del recupero dati */
+
+#conferma {
+      position: relative;
+      left: 50%;
+      top: 0%;
+}  
+  
+  
+#conferma .confermarecupero {
+	top: 220px;
+	left: -275px;
+	position: relative;
+	width: 750px;
+	font-family: Helvetica;
+	font-style: normal;
+	font-size: 16px;
+	color: black;
+	text-align: justify;
+}
+
+
+
+/*********************************************************/
+
+/* stile della label Modifica la tua password */
+#cambiapassword {
+      position: relative;
+      left: 50%;
+      top: 0%;
+}
+
+
+/* definisce la larghezza e il padding top e left del field Password  */
+#cambiapassword body {
+  font-family: 'Palatino Linotype', serif;
+  max-width: 590px;
+  padding: 0px 5px;
+}
+
+
+#cambiapassword .labelpassword {
+    position: relative;
+      left: -90px;
+      top: 200px;
+      width: 300px;
+      font-family: Times;
+      font-style: normal;
+      font-size: 16px;
+      font-weight:bold;
+      color: black;
+}
+
+
+#cambiapassword fieldset{
+  margin-bottom: 5px;
+  padding: 10px;
+  position: relative;
+  left: -130px;
+  top: 220px;
+  width: 230px;
+  
+}
+
+
+#cambiapassword input, textarea {
+  width: 300px;
+}
+
+#cambiapassword textarea {
+  height: 200px;
+}
+
+
+/* stile del submit Cambia la tua password */
+#cambiapassword .aggiornapassword {
+    position: relative;
+      left: -75px;
+      top: 185px;
+}
+
+
+#cambiapassword input[type=submit] {
+  width: 150px;
+  font-family: Times;
+  font-style: normal;
+  font-size: 12px;
+  font-weight:normal;
+  color: black;
+}
+
+
+#cambiapassword input[type=password] {
+  width: 150px;
+}
+
+
+/*********************************************************/
+
+
+
+/* invita l'utente a tornare alla pagina Le Persone */
+
+#tornahome {
+      position: relative;
+      left: 50%;
+      top: 0%;
+}
+
+
+#tornahome .back {
+	top: 220px;
+	left: -72px;
+	position: relative;
+	width: 400px;
+	font-family: Helvetica;
+	font-style: normal;
+	font-size: 16px;
+	color: black;
+}
+
+
+#tornahome .edithome {
+      position: relative;
+      left: -27px;
+      top: 200px;
+      width: 10px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-size: 21px;
+      color: blu;
+}
+
+
+/*********************************************************/
+
+
+
+
+
+/* presenta l'immagine di background della pagina Persone */	
+body {
+        background-image: url(Contatti.jpeg);
+        background-repeat: no-repeat;
+        background-position: 50% 0%; 
+        position: relative;
+}
+
+
+a:hover {
+     text-decoration: underline;
+}
+
