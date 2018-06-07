@@ -324,8 +324,8 @@
 body {
         background-image: url(background.jpg);
         background-repeat: no-repeat;
-       /* background-position: 50% 0%; */
-      /*  position: relative; */
+        background-position: 50% 0%; 
+      	position: relative; 
 }
 
 
