@@ -322,7 +322,7 @@
 /* presenta l'immagine di background della pagina Le Persone */	
 
 body {
-        background-image: url(loginPicture.jpeg);
+        background-image: url("loginPicture.jpeg");
         background-repeat: no-repeat;
         position: relative; 
 }
