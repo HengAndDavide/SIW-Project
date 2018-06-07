@@ -322,8 +322,7 @@
 /* presenta l'immagine di background della pagina Le Persone */	
 
 body {
-        background-image: url(LePersone.jpg);
-        background-color: lightblue;
+        background-image: url(loginpicture.jpg);
         background-repeat: no-repeat;
         background-position: 50% 0%; 
         position: relative; 
