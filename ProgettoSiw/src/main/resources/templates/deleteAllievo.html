@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Cancellazione Allievo</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Cancellato con Successo</h4>
+	</div>
+	<form th:action="@{/addAllievo}">
+		<button type="submit">Inserisci Nuovo Allievo</button>
+	</form>
+	<form th:action="@{/allievi}">
+		<button type="submit">Lista Tutti Allievi</button>
+	</form>
+	<form th:action="@{/home}" method="GET">
+		<button type="submit">Home</button>
+	</form>
+</body>
+</html>

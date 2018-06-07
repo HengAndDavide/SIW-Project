@@ -17,12 +17,12 @@ public class AllievoService {
 	@Autowired
 	private AllievoRepository allievoRepository;
 
-	public Allievo save(Allievo Allievo) {
-		return this.allievoRepository.save(Allievo);
+	public Allievo save(Allievo allievo) {
+		return this.allievoRepository.save(allievo);
 	}
 
-	public List<Allievo> findByLuogoNascita(String city) {
-		return this.allievoRepository.findByLuogoNascita(city);
+	public List<Allievo> findByLuogoNascita(String luogoNascita) {
+		return this.allievoRepository.findByLuogoNascita(luogoNascita);
 	}
 
 	public List<Allievo> findAll() {
@@ -58,10 +58,6 @@ public class AllievoService {
 			return false;
 	}
 
-	public Allievo findByNomeAndCognome(String nome, String cognome) {
-		return this.allievoRepository.findByNomeAndCognome(nome, cognome);
-	}
-
 	public Allievo findByEmail(String email) {
 		Optional<Allievo> allievo = this.allievoRepository.findByEmail(email);
 		if (allievo.isPresent())
@@ -70,13 +66,18 @@ public class AllievoService {
 			return null;
 	}
 
-	public void update(Allievo allievoTrovato) {
-		// allievoTrovato.setNome(nome);
-		// allievoTrovato.setCognome(cognome);
-		// allievoTrovato.setEmail(email);
-		// allievoTrovato.setDataNascita(dataNascita);
-		// allievoTrovato.setLuogoNascita(luogoNascita);
-		// allievoTrovato.setTelefono(telefono);
+	public Allievo update(Allievo allievoTrovato, String nome, String cognome, String email, String telefono,
+			String luogoNascita) {
+		allievoTrovato.setNome(nome);
+		allievoTrovato.setCognome(cognome);
+		allievoTrovato.setEmail(email);
+		allievoTrovato.setTelefono(telefono);
+		allievoTrovato.setLuogoNascita(luogoNascita);
+		return allievoTrovato;
 	}
-	
+
+	public void delete(Long id) {
+		this.allievoRepository.deleteById(id);
+	}
+
 }
