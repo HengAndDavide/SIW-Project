@@ -1,7 +1,5 @@
 package it.uniroma3.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +44,7 @@ public class AllievoController {
 
 	@RequestMapping(value = "/allievo/{id}", method = RequestMethod.GET)
 	public String getAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievo", this.allievoService.findById(id));
+		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
 		return "showAllievo";
 	}
 
@@ -58,15 +56,38 @@ public class AllievoController {
 	@RequestMapping(value = "/trovaAllievo")
 	public String trovaAllievo(@RequestParam("email") String email, Model model) {
 
-		Allievo allievo = this.allievoService.findByEmail(email);
+		Allievo allievoTrovato = this.allievoService.findByEmail(email);
 
-		if (allievo == null) {
+		if (allievoTrovato == null) {
 			model.addAttribute("notexists", "Allievo non esiste");
 			return "findAllievo";
 		} else {
-			model.addAttribute("allievo", allievo);
+			model.addAttribute("allievoTrovato", allievoTrovato);
 			return "showAllievo";
 		}
+	}
+
+	@RequestMapping(value = "/modificaAllievo/{id}", method = RequestMethod.GET)
+	public String modificaAllievo(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
+		return "gestioneAllievo";
+	}
+
+	@RequestMapping(value = "/updateAllievo/{id}", method = RequestMethod.POST)
+	public String updateAllievo(@PathVariable("id") Long id, @RequestParam("nome") String nome,
+			@RequestParam("cognome") String cognome, @RequestParam("email") String email,
+			@RequestParam("telefono") String telefono, @RequestParam("luogoNascita") String luogoNascita, Model model) {
+		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email, telefono,
+				luogoNascita);
+		this.allievoService.save(allievo);
+		model.addAttribute("allievoTrovato", allievo);
+		return "showAllievo";
+	}
+
+	@RequestMapping(value = "/cancellaAllievo/{id}", method = RequestMethod.GET)
+	public String cancelllaAllievo(@PathVariable("id") Long id, Model model) {
+		this.allievoService.delete(id);
+		return "deleteAllievo";
 	}
 
 	@RequestMapping(value = "/allievo", method = RequestMethod.POST)

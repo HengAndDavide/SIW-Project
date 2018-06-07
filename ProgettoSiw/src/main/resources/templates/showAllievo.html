@@ -8,27 +8,29 @@
 	<div>
 		<h4>Allievo</h4>
 		<div>
-			Nome : <span th:text="${allievo.nome}"></span>
+			Nome : <span th:text="${allievoTrovato.nome}"></span>
 		</div>
 		<div>
-			Cognome: <span th:text="${allievo.cognome}"></span>
+			Cognome: <span th:text="${allievoTrovato.cognome}"></span>
 		</div>
 		<div>
-			Email : <span th:text="${allievo.email}"></span>
+			Email : <span th:text="${allievoTrovato.email}"></span>
 		</div>
 		<div>
-			Telefono : <span th:text="${allievo.telefono}"></span>
+			Telefono : <span th:text="${allievoTrovato.telefono}"></span>
 		</div>
 		<div>
-			Data di Nascita : <span th:text="${allievo.dataNascita}"></span>
+			Data di Nascita : <span th:text="${allievoTrovato.dataNascita}"></span>
 		</div>
 		<div>
-			Luogo di Nascita : <span th:text="${allievo.luogoNascita}"></span>
+			Luogo di Nascita : <span th:text="${allievoTrovato.luogoNascita}"></span>
 		</div>
 		<br>
-		<a th:href="@{/addAllievo}">Inserisci Nuovo Allievo</a>
-		<a th:href="@{/allievi}">Lista Tutti Allievi</a>
-		<a href="">Home</a>
+		<form th:action="@{'/modificaAllievo' + '/' + ${allievoTrovato.id}}"><button type="submit">Modifica Allievo</button></form>
+		<form th:action="@{'/cancellaAllievo' + '/' + ${allievoTrovato.id}}"><button type="submit">Cancella Allievo</button></form>
+		<form th:action="@{/addAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
+		<form th:action="@{/allievi}"><button type="submit">Lista Tutti Allievi</button></form>
+		<form th:action="@{/home}" method="GET"><button type="submit">Home</button></form>
 	</div>
 </body>
 </html>
