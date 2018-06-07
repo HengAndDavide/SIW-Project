@@ -1,7 +1,7 @@
 
 /* BackGround-Sfondo per pagina di log-in.*/
-#nota {
-	
+#entirePage{
+	background-color: lightblue;
     background: url(loginPicture.jpg);
     background-repeat: no-repeat;
 }
@@ -12,7 +12,7 @@
       position: relative;
       left: 50%;
       top: 0%;
-       background: url(loginPicture.jpg);
+      
 }
 
 
