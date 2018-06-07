@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Cerca Allievo</h4>
+		<p th:text="${notexists}"></p>
+	</div>
+	<form th:action="@{/trovaAllievo}" method="GET">
+		<table>
+			<tr>
+				<td>Email :</td>
+				<td><input type="text" name="email" /></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Cerca Allievo</button></td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<form th:action="@{/addAllievo}">
+		<button type="submit">Inserisci Nuovo Allievo</button>
+	</form>
+	<form th:action="@{/home}">
+		<button type="submit">Home</button>
+	</form>
+</body>
+</html>
