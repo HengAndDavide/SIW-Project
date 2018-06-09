@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
-import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.repository.AttivitaRepository;
 
 @Transactional
@@ -19,14 +17,7 @@ public class AttivitaService {
 	@Autowired
 	private AttivitaRepository attivitaRepository;
 
-	public Attivita save(Attivita attivita) {
-		return this.attivitaRepository.save(attivita);
-	}
-
-	public List<Attivita> findAll() {
-		return (List<Attivita>) this.attivitaRepository.findAll();
-	}
-
+	// Metodi di ricerca
 	public Attivita findById(Long id) {
 		Optional<Attivita> attivita = this.attivitaRepository.findById(id);
 		if (attivita.isPresent())
@@ -34,7 +25,7 @@ public class AttivitaService {
 		else
 			return null;
 	}
-	
+
 	public Attivita findByDescrizione(String descrizione) {
 		Optional<Attivita> attivita = this.attivitaRepository.findByDescrizione(descrizione);
 		if (attivita.isPresent())
@@ -43,19 +34,37 @@ public class AttivitaService {
 			return null;
 	}
 
+	public List<Attivita> findAll() {
+		return (List<Attivita>) this.attivitaRepository.findAll();
+	}
+
+	// Metodi di supporto
+
 	public void uppa(Attivita attivita) {
-		String descrizione = attivita.getDescrizione();
-		descrizione = descrizione.substring(0, 1).toUpperCase()
-				+ descrizione.substring(1, descrizione.length()).toLowerCase();
-		attivita.setDescrizione(descrizione);
+		attivita.setDescrizione(uppaString(attivita.getDescrizione()));
+	}
+
+	public String uppaString(String str) {
+		StringBuilder b = new StringBuilder(str);
+		int i = 0;
+		do {
+			b.replace(i, i + 1, b.substring(i, i + 1).toUpperCase());
+			i = b.indexOf(" ", i) + 1;
+		} while (i > 0 && i < b.length());
+		return b.toString();
 	}
 
 	public boolean alreadyExists(Attivita attivita) {
-		Optional<Attivita> Attivita = this.attivitaRepository.findByDescrizione(attivita.getDescrizione());
-		if (Attivita.isPresent())
+		Optional<Attivita> attivitaTrovata = this.attivitaRepository.findByDescrizione(attivita.getDescrizione());
+		if (attivitaTrovata.isPresent())
 			return true;
 		else
 			return false;
+	}
+
+	// Metodi persistence
+	public Attivita save(Attivita attivita) {
+		return this.attivitaRepository.save(attivita);
 	}
 
 	public Attivita update(Attivita attivitaTrovata, String descrizione, Double prezzo) {

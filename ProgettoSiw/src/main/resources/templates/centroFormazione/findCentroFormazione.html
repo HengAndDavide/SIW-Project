@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Ricerca Centro Formazione</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Cerca Centro Formazione</h4>
+		<p th:text="${notexists}"></p>
+	</div>
+	<form th:action="@{/findCentroFormazione}" method="GET">
+		<table>
+			<tr>
+				<td>Nome :</td>
+				<td><input type="text" name="nome"/></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Cerca Centro Formazione</button></td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<form th:action="@{/inserisciCentroFormazione}"><button type="submit">Inserisci Nuovo Centro Formazione</button></form>
+	<form th:action="@{/homeCentroFormazione}"><button type="submit">Gestione Centri Formazione</button></form>
+</body>
+</html>

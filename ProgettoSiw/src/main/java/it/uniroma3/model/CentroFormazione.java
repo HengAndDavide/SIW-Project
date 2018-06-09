@@ -15,6 +15,9 @@ public class CentroFormazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	public Long getId() {
+		return id;
+	}
 
 	@Column(nullable = false)
 	private String nome;

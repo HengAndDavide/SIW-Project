@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import it.uniroma3.model.Allievo;
 import it.uniroma3.service.AllievoService;
 import it.uniroma3.service.AttivitaService;
+import it.uniroma3.service.CentroFormazioneService;
 
 @SpringBootApplication
 public class Progetto2018Application {
@@ -21,24 +22,39 @@ public class Progetto2018Application {
 	@Autowired
 	private AttivitaService attivitaService;
 
+	@Autowired
+	private CentroFormazioneService CentroFormazioneService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(Progetto2018Application.class, args);
 	}
 
-	@SuppressWarnings("deprecation")
 	@PostConstruct
 	public void init() {
-		
-		Allievo allievo = new Allievo();
-		Date data = new Date(1993 - 1900, 03 - 1, 05);
-		allievo.setNome("Heng");
-		allievo.setCognome("Ge");
-		allievo.setDataNascita(data);
-		allievo.setEmail("geheng@gmail.it");
-		allievo.setLuogoNascita("Cina");
-		allievo.setTelefono("06432423");
-		allievoService.save(allievo);
-		
+
+		// Date data = new Date();
+		// Allievo allievo = new Allievo();
+		// allievo.setNome("");
+		// allievo.setCognome("");
+		// allievo.setDataNascita(data);
+		// allievo.setEmail("");
+		// allievo.setTelefono("");
+		// allievo.setLuogoNascita("");
+		// allievoService.save(allievo);
+
+		// CentroFormazione centroFormazione = new CentroFormazione();
+		// centroFormazione.setNome("Pittura");
+		// centroFormazione.setEmail("pittura@centro.it");
+		// centroFormazione.setIndirizzo("Via Arte");
+		// centroFormazione.setTelefono("06453453");
+		// centroFormazione.setCapienzaMassima(30);
+		// CentroFormazioneService.save(centroFormazione);
+		//
+		// Attivita attivita = new Attivita();
+		// attivita.setDescrizione("Natura Morta");
+		// attivita.setPrezzo(70);
+		// attivita.setCentroFormazione(centroFormazione);
+		// attivitaService.save(attivita);
 		
 	}
 

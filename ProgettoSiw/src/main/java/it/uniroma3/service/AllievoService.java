@@ -17,8 +17,21 @@ public class AllievoService {
 	@Autowired
 	private AllievoRepository allievoRepository;
 
-	public Allievo save(Allievo allievo) {
-		return this.allievoRepository.save(allievo);
+	// Metodi di ricerca
+	public Allievo findById(Long id) {
+		Optional<Allievo> allievo = this.allievoRepository.findById(id);
+		if (allievo.isPresent())
+			return allievo.get();
+		else
+			return null;
+	}
+
+	public Allievo findByEmail(String email) {
+		Optional<Allievo> allievo = this.allievoRepository.findByEmail(email);
+		if (allievo.isPresent())
+			return allievo.get();
+		else
+			return null;
 	}
 
 	public List<Allievo> findByLuogoNascita(String luogoNascita) {
@@ -29,41 +42,35 @@ public class AllievoService {
 		return (List<Allievo>) this.allievoRepository.findAll();
 	}
 
-	public Allievo findById(Long id) {
-		Optional<Allievo> allievo = this.allievoRepository.findById(id);
-		if (allievo.isPresent())
-			return allievo.get();
-		else
-			return null;
-	}
-
+	// Metodi di supporto
 	public void uppa(Allievo allievo) {
-		String nome = allievo.getNome();
-		nome = nome.substring(0, 1).toUpperCase() + nome.substring(1, nome.length()).toLowerCase();
-		allievo.setNome(nome);
-		String cognome = allievo.getCognome();
-		cognome = cognome.substring(0, 1).toUpperCase() + cognome.substring(1, cognome.length()).toLowerCase();
-		allievo.setCognome(cognome);
-		String citta = allievo.getLuogoNascita();
-		citta = citta.substring(0, 1).toUpperCase() + citta.substring(1, citta.length()).toLowerCase();
-		allievo.setLuogoNascita(citta);
+		allievo.setNome(uppaString(allievo.getNome()));
+		allievo.setCognome(uppaString(allievo.getCognome()));
+		allievo.getEmail().toLowerCase();
+		allievo.setLuogoNascita(uppaString(allievo.getLuogoNascita()));
 	}
 
-	public boolean alreadyExists(Allievo Allievo) {
-		List<Allievo> Allievi = this.allievoRepository.findByNomeAndCognomeAndLuogoNascita(Allievo.getNome(),
-				Allievo.getCognome(), Allievo.getLuogoNascita());
-		if (Allievi.size() > 0)
+	public String uppaString(String str) {
+		StringBuilder b = new StringBuilder(str);
+		int i = 0;
+		do {
+			b.replace(i, i + 1, b.substring(i, i + 1).toUpperCase());
+			i = b.indexOf(" ", i) + 1;
+		} while (i > 0 && i < b.length());
+		return b.toString();
+	}
+
+	public boolean alreadyExists(Allievo allievo) {
+		Optional<Allievo> allievoTrovato = this.allievoRepository.findByEmail(allievo.getEmail());
+		if (allievoTrovato.isPresent())
 			return true;
 		else
 			return false;
 	}
 
-	public Allievo findByEmail(String email) {
-		Optional<Allievo> allievo = this.allievoRepository.findByEmail(email);
-		if (allievo.isPresent())
-			return allievo.get();
-		else
-			return null;
+	// Metodi Persistence
+	public Allievo save(Allievo allievo) {
+		return this.allievoRepository.save(allievo);
 	}
 
 	public Allievo update(Allievo allievoTrovato, String nome, String cognome, String email, String telefono,

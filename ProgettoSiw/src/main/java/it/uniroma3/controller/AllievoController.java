@@ -26,27 +26,29 @@ public class AllievoController {
 	private AllievoValidator validator;
 
 	@RequestMapping("/homeAllievo")
-	public String home() {
-		return "allievo/gestioneAllievi.html";
+	public String homeAllievo() {
+		return "allievo/gestioneAllievi";
 	}
-	//Inserisci Allievo metodo Supporto
+
+	// Inserisci Allievo metodo Supporto
 	@RequestMapping("/inserisciAllievo")
 	public String inserisciAllievo(Model model) {
 		model.addAttribute("allievo", new Allievo());
 		return "allievo/allievoForm";
 	}
-	//Persistence Allievo
+
+	// Persistence Allievo
 	@RequestMapping(value = "/saveAllievo", method = RequestMethod.POST)
 	public String nuovoAllievo(@Valid @ModelAttribute("allievo") Allievo allievo, Model model,
 			BindingResult bindingResult) {
 		this.validator.validate(allievo, bindingResult);
+		this.allievoService.uppa(allievo);
 
 		if (this.allievoService.alreadyExists(allievo)) {
 			model.addAttribute("exists", "Allievo esiste gia'");
 			return "allievo/allievoForm";
 		} else {
 			if (!bindingResult.hasErrors()) {
-				this.allievoService.uppa(allievo);
 				this.allievoService.save(allievo);
 				model.addAttribute("listaAllievi", this.allievoService.findAll());
 				return "allievo/allievoList";
@@ -55,15 +57,18 @@ public class AllievoController {
 		return "allievo/allievoForm";
 	}
 
-	//Ricerca Allievo metodo Supporto
+	// Ricerca Allievo metodo Supporto
 	@RequestMapping("/cercaAllievo")
 	public String cercaAllievo() {
 		return "allievo/findAllievo";
 	}
-	//Search Allievo Emal
+
+	// Search Allievo Email
 	@RequestMapping(value = "/findAllievo")
 	public String findAllievo(@RequestParam("email") String email, Model model) {
+
 		Allievo allievoTrovato = this.allievoService.findByEmail(email);
+		
 		if (allievoTrovato == null) {
 			model.addAttribute("notexists", "Allievo non esiste");
 			return "allievo/findAllievo";
@@ -71,39 +76,44 @@ public class AllievoController {
 			model.addAttribute("allievoTrovato", allievoTrovato);
 			return "allievo/showAllievo";
 		}
+
 	}
-	//Search Allievo tramite ID
+
+	// Search Allievo tramite ID
 	@RequestMapping(value = "/findAllievoId/{id}", method = RequestMethod.GET)
 	public String findAllievo(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
 		return "allievo/showAllievo";
 	}
-	//Modifica Allievo tramite id Supporto
+
+	// Modifica Allievo tramite id Supporto
 	@RequestMapping(value = "/modificaAllievo/{id}", method = RequestMethod.GET)
 	public String modificaAllievo(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
 		return "allievo/mergeAllievo";
 	}
-	//Update Allievo tramite Id
+
+	// Update Allievo tramite Id
 	@RequestMapping(value = "/updateAllievo/{id}", method = RequestMethod.POST)
 	public String updateAllievo(@PathVariable("id") Long id, @RequestParam("nome") String nome,
 			@RequestParam("cognome") String cognome, @RequestParam("email") String email,
 			@RequestParam("telefono") String telefono, @RequestParam("luogoNascita") String luogoNascita, Model model) {
 		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email, telefono,
 				luogoNascita);
+		this.allievoService.uppa(allievo);
 		this.allievoService.save(allievo);
 		model.addAttribute("allievoTrovato", allievo);
 		return "allievo/showAllievo";
 	}
-	
-	//Mostra Lista Allievi
+
+	// Mostra Lista Allievi
 	@RequestMapping("/listaAllievi")
 	public String allievi(Model model) {
 		model.addAttribute("listaAllievi", this.allievoService.findAll());
 		return "allievo/allievoList";
 	}
 
-	//Delete Allievo tramite Id
+	// Delete Allievo tramite Id
 	@RequestMapping(value = "/cancellaAllievo/{id}", method = RequestMethod.GET)
 	public String cancelllaAllievo(@PathVariable("id") Long id, Model model) {
 		this.allievoService.delete(id);

@@ -26,9 +26,11 @@ public class AttivitaController {
 	@Autowired
 	private AttivitaValidator validator;
 
+	private CentroFormazione cf;
+
 	@RequestMapping("/homeAttivita")
-	public String home() {
-		return "attivita/gestioneAttivita.html";
+	public String homeAttivita() {
+		return "attivita/gestioneAttivita";
 	}
 
 	@RequestMapping("/inserisciAttivita")
@@ -36,17 +38,18 @@ public class AttivitaController {
 		model.addAttribute("attivita", new Attivita());
 		return "attivita/attivitaForm";
 	}
+
 	@RequestMapping(value = "/saveAttivita", method = RequestMethod.POST)
 	public String saveAttivita(@Valid @ModelAttribute("attivita") Attivita attivita, Model model,
 			BindingResult bindingResult) {
 		this.validator.validate(attivita, bindingResult);
+		this.attivitaService.uppa(attivita);
 
 		if (this.attivitaService.alreadyExists(attivita)) {
 			model.addAttribute("exists", "Attivita esiste gia'");
 			return "attivita/attivitaForm";
 		} else {
 			if (!bindingResult.hasErrors()) {
-				this.attivitaService.uppa(attivita);
 				this.attivitaService.save(attivita);
 				model.addAttribute("listaAttivita", this.attivitaService.findAll());
 				return "attivita/attivitaList";
@@ -59,6 +62,7 @@ public class AttivitaController {
 	public String cercaAttivita() {
 		return "attivita/findAttivita";
 	}
+
 	@RequestMapping(value = "/findAttivita")
 	public String findAttivita(@RequestParam("descrizione") String descrizione, Model model) {
 		Attivita attivitaTrovato = this.attivitaService.findByDescrizione(descrizione);
@@ -70,28 +74,29 @@ public class AttivitaController {
 			return "attivita/showAttivita";
 		}
 	}
+
 	@RequestMapping(value = "/findAttivitaId/{id}", method = RequestMethod.GET)
 	public String findAttivita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("attivitaTrovato", this.attivitaService.findById(id));
+		model.addAttribute("attivitaTrovata", this.attivitaService.findById(id));
 		return "attivita/showAttivita";
 	}
-
-	
 
 	@RequestMapping(value = "/modificaAttivita/{id}", method = RequestMethod.GET)
 	public String modificaAttivita(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("attivitaTrovato", this.attivitaService.findById(id));
-		return "attivita/gestioneAttivita";
+		return "attivita/mergeAttivita";
 	}
+
 	@RequestMapping(value = "/updateAttivita/{id}", method = RequestMethod.POST)
 	public String updateAttivita(@PathVariable("id") Long id, @RequestParam("descrizione") String decrizione,
 			@RequestParam("prezzo") Double prezzo, Model model) {
 		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo);
+		this.attivitaService.uppa(attivita);
 		this.attivitaService.save(attivita);
-		model.addAttribute("attivitaTrovato", attivita);
+		model.addAttribute("attivitaTrovata", attivita);
 		return "attivita/showAttivita";
 	}
-	
+
 	@RequestMapping("/listaAttivita")
 	public String listaAttivita(Model model) {
 		model.addAttribute("listaAttivita", this.attivitaService.findAll());
@@ -103,7 +108,5 @@ public class AttivitaController {
 		this.attivitaService.delete(id);
 		return "attivita/deleteAttivita";
 	}
-	
-
 
 }

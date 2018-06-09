@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Inserimento Centro Formazione</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div>
+		<h4 class="title">Inserisci Nuovo Centro Formazione</h4>
+		<p th:text="${exists}"></p>
+	</div>
+	<form th:action="@{/saveCentroFormazione}" method="POST" th:object="${centroFormazione}">
+		<table>
+			<tr>
+				<td>Nome :</td>
+				<td><input type="text" th:field="*{nome}" /></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></td>
+			</tr>
+			<tr>
+				<td>Indirizzo :</td>
+				<td><input type="text" th:field="*{indirizzo}" /></td>
+				<td th:if="${#fields.hasErrors('indirizzo')}" th:errors="*{indirizzo}"></td>
+			</tr>
+			<tr>
+				<td>Email :</td>
+				<td><input type="text" th:field="*{email}" /></td>
+				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+			</tr>
+			<tr>
+				<td>Telefono :</td>
+				<td><input type="text" th:field="*{telefono}" /></td>
+				<td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
+			</tr>
+			<tr>
+				<td>Capienza Massima :</td>
+				<td><input type="number" th:field="*{capienzaMassima}" /></td>
+				<td th:if="${#fields.hasErrors('capienzaMassima')}"
+					th:errors="*{capienzaMassima}"></td>
+			</tr>
+
+			<tr>
+				<td><br>
+				<button type="submit">Registra Centro Formazione</button></td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<form th:action="@{/homeCentroFormazione}"><button type="submit">Gestione Centri Formazione</button>
+	</form>
+</body>
+</html>

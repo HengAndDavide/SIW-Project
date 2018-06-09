@@ -8,8 +8,8 @@ import it.uniroma3.model.Attivita;
 
 public interface AttivitaRepository extends CrudRepository<Attivita, Long> {
 
+	public Optional<Attivita> findById(Long id);
+
 	public Optional<Attivita> findByDescrizione(String descrizione);
 
-	public Optional<Attivita> findById(Long id);
-	
 }
