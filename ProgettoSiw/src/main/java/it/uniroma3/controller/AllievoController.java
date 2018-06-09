@@ -42,13 +42,13 @@ public class AllievoController {
 	public String nuovoAllievo(@Valid @ModelAttribute("allievo") Allievo allievo, Model model,
 			BindingResult bindingResult) {
 		this.validator.validate(allievo, bindingResult);
-		this.allievoService.uppa(allievo);
 
-		if (this.allievoService.alreadyExists(allievo)) {
-			model.addAttribute("exists", "Allievo esiste gia'");
-			return "allievo/allievoForm";
-		} else {
-			if (!bindingResult.hasErrors()) {
+		if (!bindingResult.hasErrors()) {
+			this.allievoService.uppa(allievo);
+			if (this.allievoService.alreadyExists(allievo)) {
+				model.addAttribute("exists", "Allievo esiste gia'");
+				return "allievo/allievoForm";
+			} else {
 				this.allievoService.save(allievo);
 				model.addAttribute("listaAllievi", this.allievoService.findAll());
 				return "allievo/allievoList";
@@ -67,16 +67,20 @@ public class AllievoController {
 	@RequestMapping(value = "/findAllievo")
 	public String findAllievo(@RequestParam("email") String email, Model model) {
 
-		Allievo allievoTrovato = this.allievoService.findByEmail(email);
-		
-		if (allievoTrovato == null) {
-			model.addAttribute("notexists", "Allievo non esiste");
-			return "allievo/findAllievo";
-		} else {
-			model.addAttribute("allievoTrovato", allievoTrovato);
-			return "allievo/showAllievo";
-		}
+		if (!email.equals("") && email != null) {
 
+			Allievo allievoTrovato = this.allievoService.findByEmail(email.toLowerCase());
+
+			if (allievoTrovato == null) {
+				model.addAttribute("notexists", "Allievo non esiste");
+				return "allievo/findAllievo";
+			} else {
+				model.addAttribute("allievoTrovato", allievoTrovato);
+				return "allievo/showAllievo";
+			}
+		}
+		model.addAttribute("errorParam", "Inserisci Email");
+		return "allievo/findAllievo";
 	}
 
 	// Search Allievo tramite ID

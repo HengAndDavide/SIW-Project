@@ -10,11 +10,11 @@
 		<h4 class="title">Cerca Allievo</h4>
 		<p th:text="${notexists}"></p>
 	</div>
-	<form th:action="@{/findAllievo}" method="GET">
+	<form th:action="@{/findAllievo}" method="GET" >
 		<table>
 			<tr>
 				<td>Email :</td>
-				<td><input type="text" name="email" /></td>
+				<td><input type="text" name="email" /><span th:text=" ${errorParam}"></span></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Cerca Allievo</button></td>

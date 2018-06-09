@@ -84,5 +84,10 @@ public class CentroFormazione {
 	public void setCapienzaMassima(int capienzaMassima) {
 		this.capienzaMassima = capienzaMassima;
 	}
+	
+	@Override
+	public String toString() {
+		return "Nome Centro : " + nome ;
+	}
 
 }

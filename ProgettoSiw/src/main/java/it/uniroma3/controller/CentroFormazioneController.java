@@ -20,23 +20,14 @@ import it.uniroma3.service.CentroFormazioneService;
 public class CentroFormazioneController {
 
 	@Autowired
-	private CentroFormazioneService centroService;
+	private CentroFormazioneService centroFormazioneService;
 
 	@Autowired
 	private CentroFormazioneValidator validator;
 
-	private CentroFormazione cf;
-
 	@RequestMapping("/homeCentroFormazione")
 	public String homeCentroFormazione() {
 		return "centroFormazione/gestioneCentriFormazione";
-	}
-
-	// Settare CentroFormazione tramite ID
-	@RequestMapping(value = "/settaCentroFormazioneId/{id}", method = RequestMethod.GET)
-	public String settaCentroFormazione(@PathVariable("id") Long id, Model model) {
-		this.setCf(this.centroService.findById(id));
-		return "centroFormazione/gestioneCentroFormazione";
 	}
 
 	// Inserisci CentroFormazione metodo Supporto
@@ -51,15 +42,15 @@ public class CentroFormazioneController {
 	public String nuovoCentroFormazione(@Valid @ModelAttribute("centroFormazione") CentroFormazione centroFormazione,
 			Model model, BindingResult bindingResult) {
 		this.validator.validate(centroFormazione, bindingResult);
-		this.centroService.uppa(centroFormazione);
+		this.centroFormazioneService.uppa(centroFormazione);
 
-		if (this.centroService.alreadyExists(centroFormazione)) {
+		if (this.centroFormazioneService.alreadyExists(centroFormazione)) {
 			model.addAttribute("exists", "CentroFormazione esiste gia'");
 			return "centroFormazione/centroFormazioneForm";
 		} else {
 			if (!bindingResult.hasErrors()) {
-				this.centroService.save(centroFormazione);
-				model.addAttribute("listaCentriFormazione", this.centroService.findAll());
+				this.centroFormazioneService.save(centroFormazione);
+				model.addAttribute("listaCentriFormazione", this.centroFormazioneService.findAll());
 				return "centroFormazione/centroFormazioneList";
 			}
 		}
@@ -75,27 +66,33 @@ public class CentroFormazioneController {
 	// Search CentroFormazione Email
 	@RequestMapping(value = "/findCentroFormazione")
 	public String findCentroFormazione(@RequestParam("nome") String nome, Model model) {
-		CentroFormazione CentroFormazioneTrovato = this.centroService.findByNome(nome);
-		if (CentroFormazioneTrovato == null) {
-			model.addAttribute("notexists", "centroFormazione non esiste");
-			return "centroFormazione/findCentroFormazione";
-		} else {
-			model.addAttribute("centroFormazioneTrovato", CentroFormazioneTrovato);
-			return "centroFormazione/showCentroFormazione";
+
+		if (!nome.equals("") && nome != null) {
+			this.centroFormazioneService.uppaString(nome);
+			CentroFormazione CentroFormazioneTrovato = this.centroFormazioneService.findByNome(nome);
+			if (CentroFormazioneTrovato == null) {
+				model.addAttribute("notexists", "centroFormazione non esiste");
+				return "centroFormazione/findCentroFormazione";
+			} else {
+				model.addAttribute("centroFormazioneTrovato", CentroFormazioneTrovato);
+				return "centroFormazione/showCentroFormazione";
+			}
 		}
+		model.addAttribute("errorParam", "Inserisci Nome Centro Formazione");
+		return "centroFormazione/findCentroFormazione";
 	}
 
 	// Search CentroFormazione tramite ID
 	@RequestMapping(value = "/findCentroFormazioneId/{id}", method = RequestMethod.GET)
 	public String findCentroFormazione(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("centroFormazioneTrovato", this.centroService.findById(id));
+		model.addAttribute("centroFormazioneTrovato", this.centroFormazioneService.findById(id));
 		return "centroFormazione/showCentroFormazione";
 	}
 
 	// Modifica CentroFormazione tramite id Supporto
 	@RequestMapping(value = "/modificaCentroFormazione/{id}", method = RequestMethod.GET)
 	public String modificaCentroFormazione(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("centroFormazioneTrovato", this.centroService.findById(id));
+		model.addAttribute("centroFormazioneTrovato", this.centroFormazioneService.findById(id));
 		return "centroFormazione/mergeCentroFormazione";
 	}
 
@@ -105,10 +102,10 @@ public class CentroFormazioneController {
 			@RequestParam("indirizzo") String indirizzo, @RequestParam("email") String email,
 			@RequestParam("telefono") String telefono, @RequestParam("capienzaMassima") int capienzaMassima,
 			Model model) {
-		CentroFormazione CentroFormazione = this.centroService.update(this.centroService.findById(id), nome, indirizzo,
-				email, telefono, capienzaMassima);
-		this.centroService.uppa(CentroFormazione);
-		this.centroService.save(CentroFormazione);
+		CentroFormazione CentroFormazione = this.centroFormazioneService
+				.update(this.centroFormazioneService.findById(id), nome, indirizzo, email, telefono, capienzaMassima);
+		this.centroFormazioneService.uppa(CentroFormazione);
+		this.centroFormazioneService.save(CentroFormazione);
 		model.addAttribute("centroFormazioneTrovato", CentroFormazione);
 		return "centroFormazione/showCentroFormazione";
 	}
@@ -116,23 +113,15 @@ public class CentroFormazioneController {
 	// Mostra Lista CentriFormazione
 	@RequestMapping("/listaCentriFormazione")
 	public String listaCentri(Model model) {
-		model.addAttribute("listaCentriFormazione", this.centroService.findAll());
+		model.addAttribute("listaCentriFormazione", this.centroFormazioneService.findAll());
 		return "centroFormazione/centroFormazioneList";
 	}
 
 	// Delete CentroFormazione tramite Id
 	@RequestMapping(value = "/cancellaCentroFormazione/{id}", method = RequestMethod.GET)
 	public String cancelllaCentroFormazione(@PathVariable("id") Long id, Model model) {
-		this.centroService.delete(id);
+		this.centroFormazioneService.delete(id);
 		return "centroFormazione/deleteCentroFormazione";
-	}
-
-	public CentroFormazione getCf() {
-		return cf;
-	}
-
-	public void setCf(CentroFormazione cf) {
-		this.cf = cf;
 	}
 
 }

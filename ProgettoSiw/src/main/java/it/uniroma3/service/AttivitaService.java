@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.controller.MainController;
 import it.uniroma3.model.Attivita;
+import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.repository.AttivitaRepository;
 
 @Transactional
@@ -17,10 +19,13 @@ public class AttivitaService {
 	@Autowired
 	private AttivitaRepository attivitaRepository;
 
+	@Autowired
+	private MainController mainController;
+
 	// Metodi di ricerca
 	public Attivita findById(Long id) {
 		Optional<Attivita> attivita = this.attivitaRepository.findById(id);
-		if (attivita.isPresent())
+		if (attivita.isPresent() && veroCentro(attivita.get()))
 			return attivita.get();
 		else
 			return null;
@@ -39,6 +44,9 @@ public class AttivitaService {
 	}
 
 	// Metodi di supporto
+	public boolean veroCentro(Attivita attivita) {
+		return attivita.getCentroFormazione() == this.mainController.getCentroFormazione();
+	}
 
 	public void uppa(Attivita attivita) {
 		attivita.setDescrizione(uppaString(attivita.getDescrizione()));
@@ -63,7 +71,8 @@ public class AttivitaService {
 	}
 
 	// Metodi persistence
-	public Attivita save(Attivita attivita) {
+	public Attivita save(Attivita attivita, CentroFormazione centroFormazione) {
+		attivita.setCentroFormazione(centroFormazione);
 		return this.attivitaRepository.save(attivita);
 	}
 
