@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.service.CentroFormazioneService;
-import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class MainController {
@@ -31,7 +30,7 @@ public class MainController {
 	public String settaCentroFormazione(@PathVariable("id") Long id, Model model) {
 		this.setCentroFormazione(this.centroFormazioneService.findById(id));
 		model.addAttribute("centroFormazioneScelto", this.getCentroFormazione().getNome());
-		return "index";
+		return "/listaCentri/" + this.centroFormazione.getNome().toString();
 	}
 
 	public CentroFormazione getCentroFormazione() {

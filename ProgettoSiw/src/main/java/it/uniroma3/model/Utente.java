@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Direttore {
+public class Utente{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,16 +16,15 @@ public class Direttore {
 	private String cognome;
 	@Column(nullable = false)
 	private String nome;
-
 	@Column(nullable = false, unique = true)
 	private String email;
 	@Column(nullable = false)
 	private String password;
 
-	public Direttore() {
+	public Utente() {
 	}
 
-	public Direttore(String cognome, String nome, String email, String password) {
+	public Utente(String cognome, String nome, String email, String password) {
 		this.cognome = cognome;
 		this.nome = nome;
 		this.email = email;

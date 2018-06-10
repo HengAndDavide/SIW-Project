@@ -15,6 +15,7 @@ public class CentroFormazione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	public Long getId() {
 		return id;
 	}
@@ -29,7 +30,7 @@ public class CentroFormazione {
 	private String telefono;
 	@Column(nullable = false)
 	private int capienzaMassima;
-	
+
 	@OneToMany(mappedBy = "centroFormazione")
 	private List<Attivita> listaAttivita;
 
@@ -84,10 +85,10 @@ public class CentroFormazione {
 	public void setCapienzaMassima(int capienzaMassima) {
 		this.capienzaMassima = capienzaMassima;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Nome Centro : " + nome ;
+		return nome.toString();
 	}
 
 }

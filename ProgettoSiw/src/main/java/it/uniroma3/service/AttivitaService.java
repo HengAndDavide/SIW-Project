@@ -48,11 +48,11 @@ public class AttivitaService {
 		return attivita.getCentroFormazione() == this.mainController.getCentroFormazione();
 	}
 
-	public void uppa(Attivita attivita) {
-		attivita.setDescrizione(uppaString(attivita.getDescrizione()));
+	public void uploadParametri(Attivita attivita) {
+		attivita.setDescrizione(uploadString(attivita.getDescrizione()));
 	}
 
-	public String uppaString(String str) {
+	public String uploadString(String str) {
 		StringBuilder b = new StringBuilder(str);
 		int i = 0;
 		do {

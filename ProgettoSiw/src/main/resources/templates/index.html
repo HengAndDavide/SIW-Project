@@ -7,14 +7,9 @@
 <body>
 	<div>
 		<h4 class="title">Home</h4>
-		<div>
-			<span th:text="${centroFormazioneScelto}"></span>
-		</div>
 	</div>
 	<br>
 	<form th:action="@{/homeAllievo}" method="GET"><button type="submit">Gestione Allievo</button></form>
-	<form th:action="@{/homeAttivita}" method="GET"><button type="submit">Gestione Attivita</button></form>
-	<form th:action="@{/homeCentroFormazione}" method="GET"><button type="submit">Gestione Centro Formazione</button></form>
-	<form th:action="@{/settaCentroFormazione}" method="GET"><button type="submit">Scegli Centro Formazione Da Gestire</button></form>
+	<form th:action="@{/settaCentroFormazione}" method="GET"><button type="submit">Gestione Centri Formazione</button></form>
 </body>
 </html>

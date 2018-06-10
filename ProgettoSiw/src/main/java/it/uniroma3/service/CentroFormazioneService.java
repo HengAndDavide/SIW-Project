@@ -72,14 +72,13 @@ public class CentroFormazioneService {
 	}
 
 	// Metodi di supporto
-
-	public void uppa(CentroFormazione centroFormazione) {
-		centroFormazione.setNome(uppaString(centroFormazione.getNome()));
-		centroFormazione.setIndirizzo(uppaString(centroFormazione.getIndirizzo()));
+	public void uploadParametri(CentroFormazione centroFormazione) {
+		centroFormazione.setNome(uploadString(centroFormazione.getNome()));
+		centroFormazione.setIndirizzo(uploadString(centroFormazione.getIndirizzo()));
 		centroFormazione.getEmail().toLowerCase();
 	}
 
-	public String uppaString(String str) {
+	public String uploadString(String str) {
 		StringBuilder b = new StringBuilder(str);
 		int i = 0;
 		do {

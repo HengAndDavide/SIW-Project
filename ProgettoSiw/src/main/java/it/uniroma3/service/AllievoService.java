@@ -43,14 +43,14 @@ public class AllievoService {
 	}
 
 	// Metodi di supporto
-	public void uppa(Allievo allievo) {
-		allievo.setNome(uppaString(allievo.getNome()));
-		allievo.setCognome(uppaString(allievo.getCognome()));
+	public void uploadParametri(Allievo allievo) {
+		allievo.setNome(uploadString(allievo.getNome()));
+		allievo.setCognome(uploadString(allievo.getCognome()));
 		allievo.getEmail().toLowerCase();
-		allievo.setLuogoNascita(uppaString(allievo.getLuogoNascita()));
+		allievo.setLuogoNascita(uploadString(allievo.getLuogoNascita()));
 	}
 
-	public String uppaString(String str) {
+	public String uploadString(String str) {
 		StringBuilder b = new StringBuilder(str);
 		int i = 0;
 		do {

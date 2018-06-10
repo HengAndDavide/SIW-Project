@@ -13,7 +13,7 @@
 		<table>
 			<tr>
 				<td>Descrizione :</td>
-				<td><input type="text" th:field="*{descrizione}" value="${attivitaTrovato.descrizione}"/></td>
+				<td><input type="text" th:field="*{descrizione}"/></td>
 				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></td>
 			</tr>
 			<tr>

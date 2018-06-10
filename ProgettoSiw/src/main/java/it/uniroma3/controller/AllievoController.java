@@ -44,18 +44,20 @@ public class AllievoController {
 		this.validator.validate(allievo, bindingResult);
 
 		if (!bindingResult.hasErrors()) {
-			this.allievoService.uppa(allievo);
+			this.allievoService.uploadParametri(allievo);
 			if (this.allievoService.alreadyExists(allievo)) {
 				model.addAttribute("exists", "Allievo esiste gia'");
 				return "allievo/allievoForm";
 			} else {
 				this.allievoService.save(allievo);
-				model.addAttribute("listaAllievi", this.allievoService.findAll());
-				return "allievo/allievoList";
+				model.addAttribute("allievoTrovato", allievo);
+				return "allievo/showAllievo";
 			}
 		}
 		return "allievo/allievoForm";
 	}
+	
+	
 
 	// Ricerca Allievo metodo Supporto
 	@RequestMapping("/cercaAllievo")
@@ -68,7 +70,7 @@ public class AllievoController {
 	public String findAllievo(@RequestParam("email") String email, Model model) {
 
 		if (!email.equals("") && email != null) {
-
+			
 			Allievo allievoTrovato = this.allievoService.findByEmail(email.toLowerCase());
 
 			if (allievoTrovato == null) {
@@ -104,7 +106,7 @@ public class AllievoController {
 			@RequestParam("telefono") String telefono, @RequestParam("luogoNascita") String luogoNascita, Model model) {
 		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email, telefono,
 				luogoNascita);
-		this.allievoService.uppa(allievo);
+		this.allievoService.uploadParametri(allievo);
 		this.allievoService.save(allievo);
 		model.addAttribute("allievoTrovato", allievo);
 		return "allievo/showAllievo";

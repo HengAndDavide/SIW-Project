@@ -30,32 +30,33 @@ public class CentroFormazioneController {
 		return "centroFormazione/gestioneCentriFormazione";
 	}
 
-	// Inserisci CentroFormazione metodo Supporto
-	@RequestMapping("/inserisciCentroFormazione")
-	public String inserisciCentroFormazione(Model model) {
-		model.addAttribute("centroFormazione", new CentroFormazione());
-		return "centroFormazione/centroFormazioneForm";
-	}
-
-	// Persistence CentroFormazione
-	@RequestMapping(value = "/saveCentroFormazione", method = RequestMethod.POST)
-	public String nuovoCentroFormazione(@Valid @ModelAttribute("centroFormazione") CentroFormazione centroFormazione,
-			Model model, BindingResult bindingResult) {
-		this.validator.validate(centroFormazione, bindingResult);
-		this.centroFormazioneService.uppa(centroFormazione);
-
-		if (this.centroFormazioneService.alreadyExists(centroFormazione)) {
-			model.addAttribute("exists", "CentroFormazione esiste gia'");
-			return "centroFormazione/centroFormazioneForm";
-		} else {
-			if (!bindingResult.hasErrors()) {
-				this.centroFormazioneService.save(centroFormazione);
-				model.addAttribute("listaCentriFormazione", this.centroFormazioneService.findAll());
-				return "centroFormazione/centroFormazioneList";
-			}
-		}
-		return "centroFormazione/centroFormazioneForm";
-	}
+//	// Inserisci CentroFormazione metodo Supporto
+//	@RequestMapping("/inserisciCentroFormazione")
+//	public String inserisciCentroFormazione(Model model) {
+//		model.addAttribute("centroFormazione", new CentroFormazione());
+//		return "centroFormazione/centroFormazioneForm";
+//	}
+//
+//	// Persistence CentroFormazione
+//	@RequestMapping(value = "/saveCentroFormazione", method = RequestMethod.POST)
+//	public String nuovoCentroFormazione(@Valid @ModelAttribute("centroFormazione") CentroFormazione centroFormazione,
+//			Model model, BindingResult bindingResult) {
+//		
+//		this.validator.validate(centroFormazione, bindingResult);
+//		if (!bindingResult.hasErrors()) {
+//			this.centroFormazioneService.uppa(centroFormazione);
+//			if (this.centroFormazioneService.alreadyExists(centroFormazione)) {
+//				model.addAttribute("exists", "CentroFormazione esiste gia'");
+//				return "centroFormazione/centroFormazioneForm";
+//			} else {
+//
+//				this.centroFormazioneService.save(centroFormazione);
+//				model.addAttribute("centroFormazioneTrovato", centroFormazione);
+//				return "centroFormazione/showCentroFormazione";
+//			}
+//		}
+//		return "centroFormazione/centroFormazioneForm";
+//	}
 
 	// Ricerca CentroFormazione metodo Supporto
 	@RequestMapping("/cercaCentroFormazione")
@@ -68,7 +69,7 @@ public class CentroFormazioneController {
 	public String findCentroFormazione(@RequestParam("nome") String nome, Model model) {
 
 		if (!nome.equals("") && nome != null) {
-			this.centroFormazioneService.uppaString(nome);
+			this.centroFormazioneService.uploadString(nome);
 			CentroFormazione CentroFormazioneTrovato = this.centroFormazioneService.findByNome(nome);
 			if (CentroFormazioneTrovato == null) {
 				model.addAttribute("notexists", "centroFormazione non esiste");
@@ -104,7 +105,7 @@ public class CentroFormazioneController {
 			Model model) {
 		CentroFormazione CentroFormazione = this.centroFormazioneService
 				.update(this.centroFormazioneService.findById(id), nome, indirizzo, email, telefono, capienzaMassima);
-		this.centroFormazioneService.uppa(CentroFormazione);
+		this.centroFormazioneService.uploadParametri(CentroFormazione);
 		this.centroFormazioneService.save(CentroFormazione);
 		model.addAttribute("centroFormazioneTrovato", CentroFormazione);
 		return "centroFormazione/showCentroFormazione";

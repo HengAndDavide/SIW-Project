@@ -44,16 +44,15 @@ public class AttivitaController {
 	public String saveAttivita(@Valid @ModelAttribute("attivita") Attivita attivita, Model model,
 			BindingResult bindingResult) {
 		this.validator.validate(attivita, bindingResult);
-		this.attivitaService.uppa(attivita);
-
-		if (this.attivitaService.alreadyExists(attivita)) {
-			model.addAttribute("exists", "Attivita esiste gia'");
-			return "attivita/attivitaForm";
-		} else {
-			if (!bindingResult.hasErrors()) {
+		if (!bindingResult.hasErrors()) {
+			this.attivitaService.uploadParametri(attivita);
+			if (this.attivitaService.alreadyExists(attivita)) {
+				model.addAttribute("exists", "Attivita esiste gia'");
+				return "attivita/attivitaForm";
+			} else {
 				this.attivitaService.save(attivita, mainController.getCentroFormazione());
-				model.addAttribute("listaAttivita", this.attivitaService.findAll());
-				return "attivita/attivitaList";
+				model.addAttribute("attivitaTrovata", attivita);
+				return "attivita/showAttivita";
 			}
 		}
 		return "attivita/attivitaForm";
@@ -68,7 +67,7 @@ public class AttivitaController {
 	public String findAttivita(@RequestParam("descrizione") String descrizione, Model model) {
 
 		if (!descrizione.equals("") && descrizione != null) {
-			this.attivitaService.uppaString(descrizione);
+			this.attivitaService.uploadString(descrizione);
 			Attivita attivitaTrovato = this.attivitaService.findByDescrizione(descrizione);
 			if (attivitaTrovato == null) {
 				model.addAttribute("notexists", "Attivita non esiste");
@@ -98,7 +97,7 @@ public class AttivitaController {
 	public String updateAttivita(@PathVariable("id") Long id, @RequestParam("descrizione") String decrizione,
 			@RequestParam("prezzo") Double prezzo, Model model) {
 		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo);
-		this.attivitaService.uppa(attivita);
+		this.attivitaService.uploadParametri(attivita);
 		this.attivitaService.save(attivita, mainController.getCentroFormazione());
 		model.addAttribute("attivitaTrovata", attivita);
 		return "attivita/showAttivita";
