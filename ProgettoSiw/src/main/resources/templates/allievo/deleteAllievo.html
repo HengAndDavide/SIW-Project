@@ -9,14 +9,7 @@
 	<div>
 		<h4 class="title">Cancellato con Successo</h4>
 	</div>
-	<form th:action="@{/addAllievo}">
-		<button type="submit">Inserisci Nuovo Allievo</button>
-	</form>
-	<form th:action="@{/allievi}">
-		<button type="submit">Lista Tutti Allievi</button>
-	</form>
-	<form th:action="@{/home}" method="GET">
-		<button type="submit">Home</button>
-	</form>
+	<form th:action="@{/listaAllievi}"><button type="submit">Lista Tutti Allievi</button></form>
+	<form th:action="@{/homeAllievo}" method="GET"><button type="submit">Gestione Allievi</button></form>
 </body>
 </html>

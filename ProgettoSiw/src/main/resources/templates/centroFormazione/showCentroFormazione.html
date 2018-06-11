@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Centro Formazione</title>
+</head>
+<body>
+	<div>
+		<h4 class="title">Centro Formazione</h4>
+		<div>
+			Nome : <span th:text="${centroFormazioneTrovato.nome}"></span>
+		</div>
+		<div>
+			Indirizzo : <span th:text="${centroFormazioneTrovato.indirizzo}"></span>
+		</div>
+		<div>
+			Email : <span th:text="${centroFormazioneTrovato.email}"></span>
+		</div>
+		<div>
+			Telefono : <span th:text="${centroFormazioneTrovato.telefono}"></span>
+		</div>
+		<div>
+			Capienza Massima : <span th:text="${centroFormazioneTrovato.capienzaMassima}"></span>
+		</div>
+		<br>
+		<form th:action="@{'/modificaCentroFormazione' + '/' + ${centroFormazioneTrovato.id}}">
+		<button type="submit">Modifica Centro Formazione</button></form>
+		<form th:action="@{'/cancellaCentroFormazione' + '/' + ${centroFormazioneTrovato.id}}"><button type="submit">Cancella Centro Formazione</button></form>
+		<form th:action="@{/inserisciCentroFormazione}"><button type="submit">Inserisci Nuovo Centro Formazione</button></form>
+		<form th:action="@{/listaCentriFormazione}"><button type="submit">Lista Tutti Centri Formazione</button></form>
+		<form th:action="@{/homeCentroFormazione}" method="GET"><button type="submit">Gestione Centri Formazione</button></form>
+	</div>
+</body>
+</html>
