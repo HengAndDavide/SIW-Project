@@ -33,14 +33,14 @@
 	 
 	 <div id="nota">
 		
-		<! genera i link titles: Home e Iscrizione >
+		<!--  genera i link titles: Home e Iscrizione -->
 		<a href="Home.html" class="edithome">Home</a> <br> 
 		<a href="pscript/iscrizione.php" class="editiscriviti">Iscrizione</a> <br>
 		
 		<h1 class="noiscrizione">Non &eacute iscritta/o?</h1>
 
       	
-      	 <! nota per regolare la partecipazione>
+      	 <!--   nota per regolare la partecipazione -->
         	<p>
      		Attenzione: L'adesione ai Termini del servizio &eacute un impegno reciproco ad una trasparente e responsabile partecipazione. 
  			Coerentemente con quanto previsto dai Termini del servizio, solo la conferma da un indirizzo e-mail precedentemente 
@@ -54,11 +54,11 @@
 
 
 
-        <! Genera il form con i campi di inserimento dei dati di accesso>
+        <!--   Genera il form con i campi di inserimento dei dati di accesso -->
 		<form id="Utenti" action="pscript/utente.php" method="post" onsubmit="return verificaclient()">
         <p ><i>Digiti i suoi dati di accesso e selezioni l'icona Accesso.</i></p>
           
-          <! Genera la maschera con i campi di inserimento dei dati di accesso >
+          <!--   Genera la maschera con i campi di inserimento dei dati di accesso -->
           <fieldset>
            <legend>I SUOI DATI DI ACCESSO</legend>
             <label for="username">User Name </label>
@@ -76,7 +76,7 @@
          
          
           
-         <! genera la maschera per il campo di inserimento della e-mail per recuperare i dati di accesso dimenticati >
+         <!--   genera la maschera per il campo di inserimento della e-mail per recuperare i dati di accesso dimenticati -->
          <form id="Recuperadati" action="pscript/Recuperadati.php" method="post" onsubmit="return startMail()">
 		  <p ><i>Ha dimenticato i suoi dati di accesso? Se si, digiti la sua e-mail che ha fornito in occasione dell'iscrizione e selezioni il tasto Invia</i></p>
           <fieldset>
