@@ -21,6 +21,12 @@ public class Attivita {
 	@Column(nullable = false)
 	private double prezzo;
 
+	@ManyToOne
+	private CentroFormazione centroFormazione;
+
+	@OneToMany(mappedBy = "attivita")
+	private List<Partecipazione> listaPartecipazioni;
+
 	public Attivita() {
 	}
 
@@ -72,11 +78,5 @@ public class Attivita {
 	public Long getId() {
 		return id;
 	}
-
-	@ManyToOne
-	private CentroFormazione centroFormazione;
-
-	@OneToMany(mappedBy = "attivita")
-	private List<Partecipazione> listaPartecipazioni;
 
 }

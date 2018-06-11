@@ -22,16 +22,15 @@ public class Allievo {
 	private String nome;
 	@Column(nullable = false)
 	private String cognome;
+	@Column()
+	@Temporal(TemporalType.DATE)
+	private Date dataNascita;
 
 	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column(nullable = false)
 	private String telefono;
-
-	@Column()
-	@Temporal(TemporalType.DATE)
-	private Date dataNascita;
 
 	@Column(nullable = false)
 	private String luogoNascita;

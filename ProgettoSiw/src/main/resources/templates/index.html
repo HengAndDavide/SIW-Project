@@ -1,13 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hallo' + '!'" />
-    <form th:action="@{/addAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
-    <form th:action="@{/findAllievo}"><button type="submit">Cerca Allievo</button></form>
-    <form th:action="@{/allievi}"><button type="submit">Lista Tutti Allievi</button></form>
+	<div>
+		<h4 class="title">Home</h4>
+	</div>
+	<br>
+	<form th:action="@{/homeAllievo}" method="GET"><button type="submit">Gestione Allievo</button></form>
+	<form th:action="@{/settaCentroFormazione}" method="GET"><button type="submit">Gestione Centri Formazione</button></form>
 </body>
 </html>

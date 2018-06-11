@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Allievo</title>
+</head>
+<body>
+	<div>
+		<h4 class="title">Dati Allievo Inseriti</h4>
+		<div>
+			Nome : <span th:text="${nuovoAllievo.nome}"></span>
+		</div>
+		<div>
+			Cognome : <span th:text="${nuovoAllievo.cognome}"></span>
+		</div>
+		<div>
+			Email : <span th:text="${nuovoAllievo.email}"></span>
+		</div>
+		<div>
+			Telefono : <span th:text="${nuovoAllievo.telefono}"></span>
+		</div>
+		<div>
+			Data di Nascita : <span th:text="${nuovoAllievo.dataNascita}"></span>
+		</div>
+		<div>
+			Luogo di Nascita : <span th:text="${nuovoAllievo.luogoNascita}"></span>
+		</div>
+		<br>
+		<form th:action="@{'/modificaAllievo' + '/' + ${nuovoAllievo.id}}"><button type="submit">Modifica Allievo</button></form>
+		
+	</div>
+</body>
+</html>

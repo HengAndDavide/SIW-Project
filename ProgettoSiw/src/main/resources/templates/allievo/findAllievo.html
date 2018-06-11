@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
+<title>Ricerca Allievo</title>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -9,11 +10,11 @@
 		<h4 class="title">Cerca Allievo</h4>
 		<p th:text="${notexists}"></p>
 	</div>
-	<form th:action="@{/trovaAllievo}" method="GET">
+	<form th:action="@{/findAllievo}" method="GET" >
 		<table>
 			<tr>
 				<td>Email :</td>
-				<td><input type="text" name="email"/></td>
+				<td><input type="text" name="email" /><span th:text=" ${errorParam}"></span></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Cerca Allievo</button></td>
@@ -21,11 +22,7 @@
 		</table>
 	</form>
 	<br>
-	<form th:action="@{/addAllievo}">
-		<button type="submit">Inserisci Nuovo Allievo</button>
-	</form>
-	<form th:action="@{/home}">
-		<button type="submit">Home</button>
-	</form>
+	<form th:action="@{/inserisciAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
+	<form th:action="@{/homeAllievo}"><button type="submit">Gestione Allievi</button></form>
 </body>
 </html>
