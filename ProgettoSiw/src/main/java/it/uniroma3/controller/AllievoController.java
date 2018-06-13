@@ -42,7 +42,6 @@ public class AllievoController {
 	public String nuovoAllievo(@Valid @ModelAttribute("allievo") Allievo allievo, Model model,
 			BindingResult bindingResult) {
 		this.validator.validate(allievo, bindingResult);
-
 		if (!bindingResult.hasErrors()) {
 			this.allievoService.uploadParametri(allievo);
 			if (this.allievoService.alreadyExists(allievo)) {
@@ -56,8 +55,6 @@ public class AllievoController {
 		}
 		return "allievo/allievoForm";
 	}
-	
-	
 
 	// Ricerca Allievo metodo Supporto
 	@RequestMapping("/cercaAllievo")
@@ -70,7 +67,7 @@ public class AllievoController {
 	public String findAllievo(@RequestParam("email") String email, Model model) {
 
 		if (!email.equals("") && email != null) {
-			
+
 			Allievo allievoTrovato = this.allievoService.findByEmail(email.toLowerCase());
 
 			if (allievoTrovato == null) {
@@ -104,8 +101,8 @@ public class AllievoController {
 	public String updateAllievo(@PathVariable("id") Long id, @RequestParam("nome") String nome,
 			@RequestParam("cognome") String cognome, @RequestParam("email") String email,
 			@RequestParam("telefono") String telefono, @RequestParam("luogoNascita") String luogoNascita, Model model) {
-		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email, telefono,
-				luogoNascita);
+		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email,
+				telefono, luogoNascita);
 		this.allievoService.uploadParametri(allievo);
 		this.allievoService.save(allievo);
 		model.addAttribute("allievoTrovato", allievo);

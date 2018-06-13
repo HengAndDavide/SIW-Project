@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Spring Security</title>
+</head>
+<body>
+	<div>
+		<h2>Accedi</h2>
+		<div th:if="${param.error}">Nome utente o password errati!</div>
+		<div th:if="${param.logout}">Hai effettuato il logout. A presto!
+		</div>
+		<form name="f" th:action="@{/login}" method="post">
+			<div>
+				<label>Email : <input type="text" name="username" /></label>
+			</div>
+			<div>
+				<label>Password: <input type="password" name="password" /></label>
+			</div>
+				<button type="submit" class="btn">Log in</button>
+		</form>
+	</div>
+</body>
+</html>

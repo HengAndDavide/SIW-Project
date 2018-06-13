@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div>
-		<h4 class="title">Dati Allievo Inseriti</h4>
+		<h4 class="title">Dati Allievo</h4>
 		<div>
 			Nome : <span th:text="${nuovoAllievo.nome}"></span>
 		</div>
@@ -26,8 +26,8 @@
 			Luogo di Nascita : <span th:text="${nuovoAllievo.luogoNascita}"></span>
 		</div>
 		<br>
-		<form th:action="@{'/modificaAllievo' + '/' + ${nuovoAllievo.id}}"><button type="submit">Modifica Allievo</button></form>
-		
+		<form th:action="@{'/salvaAllievo'}" method="POST" th:object="${nuovoAllievo}"><button type="submit">Modifica Allievo</button></form>
+		<form th:action="@{'/saveAllievo' + '/' + ${nuovoAllievo.id}}" method="POST" th:object="${nuovoAllievo}"><button type="submit">Salva Allievo</button></form>
 	</div>
 </body>
 </html>

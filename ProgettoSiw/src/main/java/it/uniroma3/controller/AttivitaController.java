@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.controller.validator.AttivitaValidator;
 import it.uniroma3.model.Attivita;
 import it.uniroma3.service.AttivitaService;
-import it.uniroma3.service.CentroFormazioneService;
 
 @Controller
 public class AttivitaController {
