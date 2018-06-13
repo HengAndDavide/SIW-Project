@@ -22,13 +22,11 @@
 				<td><input type="text" th:field="*{cognome}" /></td>
 				<td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></td>
 			</tr>
-<!-- 
+			<!-- 
 			<tr>
 				<td>Data di Nascita :</td>
-				<td><input type="date" th:field="*{date}" /></td>
-				<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></td>
-			</tr>
- -->
+				<td><input type="date" /></td>
+			</tr> -->
 			<tr>
 				<td>Email :</td>
 				<td><input type="text" th:field="*{email}" /></td>
@@ -48,7 +46,7 @@
 
 			<tr>
 				<td><br>
-				<button type="submit">Registra Allievo</button></td>
+					<button type="submit">Registra Allievo</button></td>
 			</tr>
 		</table>
 	</form>

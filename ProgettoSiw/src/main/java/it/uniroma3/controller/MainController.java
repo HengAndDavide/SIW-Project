@@ -17,6 +17,18 @@ public class MainController {
 
 	@Autowired
 	private CentroFormazioneService centroFormazioneService;
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+
+	// Login form with error
+	@RequestMapping("/login-error.html")
+	public String loginError(Model model) {
+		model.addAttribute("loginError", true);
+		return "login";
+	}
 
 	// Setta CentroFormazione
 	@RequestMapping("/settaCentroFormazione")

@@ -7,13 +7,14 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import it.uniroma3.model.Allievo;
 import it.uniroma3.service.AllievoService;
 import it.uniroma3.service.AttivitaService;
 import it.uniroma3.service.CentroFormazioneService;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class Progetto2018Application {
 
 	@Autowired
@@ -55,7 +56,7 @@ public class Progetto2018Application {
 		// attivita.setPrezzo(70);
 		// attivita.setCentroFormazione(centroFormazione);
 		// attivitaService.save(attivita);
-		
+
 	}
 
 }
