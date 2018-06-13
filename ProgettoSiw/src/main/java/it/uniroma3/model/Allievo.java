@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Allievo {
 
@@ -22,8 +24,9 @@ public class Allievo {
 	private String nome;
 	@Column(nullable = false)
 	private String cognome;
-	@Column()
+
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MMM-YYYY")
 	private Date dataNascita;
 
 	@Column(nullable = false, unique = true)
@@ -40,7 +43,7 @@ public class Allievo {
 
 	public Allievo() {
 	}
-	
+
 	public Allievo(String nome, String cognome) {
 		super();
 		this.nome = nome;

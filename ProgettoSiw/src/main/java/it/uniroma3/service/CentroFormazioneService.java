@@ -43,26 +43,26 @@ public class CentroFormazioneService {
 	}
 
 	public CentroFormazione findByEmail(String email) {
-		Optional<CentroFormazione> centro = this.centroRepository.findByEmail(email);
-		if (centro.isPresent())
-			return centro.get();
+		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByEmail(email);
+		if (centroFormazione.isPresent())
+			return centroFormazione.get();
 		else
 			return null;
 	}
 
 	public CentroFormazione findByNomeAndEmail(String nome, String email) {
-		Optional<CentroFormazione> centro = this.centroRepository.findByNomeAndEmail(nome, email);
-		if (centro.isPresent())
-			return centro.get();
+		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByNomeAndEmail(nome, email);
+		if (centroFormazione.isPresent())
+			return centroFormazione.get();
 		else
 			return null;
 	}
 
 	public CentroFormazione findByNomeAndEmailAndIndirizzo(String nome, String email, String indirizzo) {
-		Optional<CentroFormazione> centro = this.centroRepository.findByNomeAndEmailAndIndirizzo(nome, email,
+		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByNomeAndEmailAndIndirizzo(nome, email,
 				indirizzo);
-		if (centro.isPresent())
-			return centro.get();
+		if (centroFormazione.isPresent())
+			return centroFormazione.get();
 		else
 			return null;
 	}

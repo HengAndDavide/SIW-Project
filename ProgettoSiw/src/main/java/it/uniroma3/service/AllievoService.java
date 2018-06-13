@@ -62,10 +62,7 @@ public class AllievoService {
 
 	public boolean alreadyExists(Allievo allievo) {
 		Optional<Allievo> allievoTrovato = this.allievoRepository.findByEmail(allievo.getEmail());
-		if (allievoTrovato.isPresent())
-			return true;
-		else
-			return false;
+		return allievoTrovato.isPresent();
 	}
 
 	// Metodi Persistence
