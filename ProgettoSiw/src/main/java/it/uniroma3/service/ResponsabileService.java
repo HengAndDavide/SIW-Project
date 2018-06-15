@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.model.Responsabile;
-import it.uniroma3.model.Responsabile;
 import it.uniroma3.repository.ResponsabileRepository;
 
 @Transactional
@@ -17,8 +16,8 @@ public class ResponsabileService {
 	@Autowired
 	private ResponsabileRepository responsabileRepository;
 
-	public Optional<Responsabile> findByEmail(String email) {
-		Optional<Responsabile> responsabile = this.responsabileRepository.findByEmail(email);
+	public Optional<Responsabile> findByUsername(String username) {
+		Optional<Responsabile> responsabile = this.responsabileRepository.findByUsername(username);
 		if (responsabile.isPresent())
 			return responsabile;
 		else

@@ -19,13 +19,13 @@ public class ResponsabileDetailsService implements UserDetailsService {
 	private ResponsabileService responsabileService;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Optional<Responsabile> responsabile = responsabileService.findByEmail(email);
+		Optional<Responsabile> responsabile = this.responsabileService.findByUsername(username);
 
 		UserBuilder builder = null;
 		if (responsabile.isPresent()) {
-			builder = org.springframework.security.core.userdetails.User.withUsername(email);
+			builder = org.springframework.security.core.userdetails.User.withUsername(username);
 			builder.password(new BCryptPasswordEncoder().encode(responsabile.get().getPassword()));
 			builder.roles(responsabile.get().getRuolo());
 		} else {

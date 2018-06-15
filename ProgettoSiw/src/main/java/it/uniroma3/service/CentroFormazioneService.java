@@ -42,31 +42,6 @@ public class CentroFormazioneService {
 			return null;
 	}
 
-	public CentroFormazione findByEmail(String email) {
-		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByEmail(email);
-		if (centroFormazione.isPresent())
-			return centroFormazione.get();
-		else
-			return null;
-	}
-
-	public CentroFormazione findByNomeAndEmail(String nome, String email) {
-		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByNomeAndEmail(nome, email);
-		if (centroFormazione.isPresent())
-			return centroFormazione.get();
-		else
-			return null;
-	}
-
-	public CentroFormazione findByNomeAndEmailAndIndirizzo(String nome, String email, String indirizzo) {
-		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByNomeAndEmailAndIndirizzo(nome, email,
-				indirizzo);
-		if (centroFormazione.isPresent())
-			return centroFormazione.get();
-		else
-			return null;
-	}
-
 	public List<CentroFormazione> findAll() {
 		return (List<CentroFormazione>) this.centroRepository.findAll();
 	}
@@ -97,11 +72,6 @@ public class CentroFormazioneService {
 			return false;
 	}
 
-	// Persistence
-	public CentroFormazione save(CentroFormazione centroFormazione) {
-		return this.centroRepository.save(centroFormazione);
-	}
-
 	public CentroFormazione update(CentroFormazione CentroFormazioneTrovato, String nome, String indirizzo,
 			String email, String telefono, int capienzaMassima) {
 		CentroFormazioneTrovato.setNome(nome);
@@ -110,10 +80,6 @@ public class CentroFormazioneService {
 		CentroFormazioneTrovato.setTelefono(telefono);
 		CentroFormazioneTrovato.setCapienzaMassima(capienzaMassima);
 		return CentroFormazioneTrovato;
-	}
-
-	public void delete(Long id) {
-		this.centroRepository.deleteById(id);
 	}
 
 }

@@ -9,11 +9,10 @@
 	<div>
 		<h2>Accedi</h2>
 		<div th:if="${param.error}">Nome utente o password errati!</div>
-		<div th:if="${param.logout}">Hai effettuato il logout. A presto!
-		</div>
+		<div th:if="${param.logout}">Hai effettuato il logout. A presto!</div>
 		<form name="f" th:action="@{/login}" method="post">
 			<div>
-				<label>Email : <input type="text" name="username" /></label>
+				<label>Email : <input type="text" name="email" /></label>
 			</div>
 			<div>
 				<label>Password: <input type="password" name="password" /></label>

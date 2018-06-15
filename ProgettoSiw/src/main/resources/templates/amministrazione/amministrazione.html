@@ -1,0 +1,14 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="ISO-8859-1">
+<title>Amministrazione</title>
+</head>
+<body>
+	<h4>Amministrazione</h4>
+	<form th:action="@{/homeAllievo}" method="GET"><button type="submit">Home Allievo</button></form>
+	<form th:action="@{/homeAttivita}" method="GET"><button type="submit">Home Attivita</button></form>
+	<form th:action="@{/homeCentroFormazione}" method="GET"><button type="submit">Gestione Centri Formazione</button></form>
+</body>
+</html>
