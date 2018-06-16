@@ -33,12 +33,11 @@ public class Progetto2018Application {
 	@PostConstruct
 	public void init() {
 
-		Responsabile r = new Responsabile("admin", "admin", "admin", "admin", "admin");
-		this.r.save(r);
-		r = new Responsabile("res", "res", "res", "res", "res");
-		this.r.save(r);
-		
-		
+		// Responsabile r = new Responsabile("admin", "admin", "admin", "admin",
+		// "admin");
+		// this.r.save(r);
+		// r = new Responsabile("res", "res", "res", "res", "res");
+		// this.r.save(r);	
 
 		// Date data = new Date();
 		// Allievo allievo = new Allievo();

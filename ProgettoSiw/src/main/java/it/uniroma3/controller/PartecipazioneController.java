@@ -1,18 +1,11 @@
 package it.uniroma3.controller;
 
-import java.util.Date;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
@@ -32,34 +25,31 @@ public class PartecipazioneController {
 
 	@Autowired
 	private PartecipazioneService ps;
-	
-	private Allievo allievoCorrente;
 
-	@RequestMapping("/insPartecipazione")
-	private String insPartecipazione(Model model) {
-		return "partecipazione/partecipazioneForm";
+	private Allievo allievoCorrente;
+	private Attivita attivitaCorrente;
+
+	@RequestMapping("/partecipaAttivita/{id}")
+	private String insPartecipazione(@PathVariable("id") Long id, Model model) {
+		this.allievoCorrente = this.allievoService.findById(id);
+		model.addAttribute("listaAttivita", this.attivitaService.findAll());
+		return "partecipazione/attivitaList";
 	}
 
-	@RequestMapping(value = "/inserisciPartecipazione", method = RequestMethod.POST)
-	public String inserisciPartecipazione(@ModelAttribute("allievo") Allievo allievo,
-			@RequestParam("oraInizio") Date oraInizio, 
-			@RequestParam("oraFine") Date oraFine,
-			Model model) {
+	@RequestMapping(value = "/confermaPartecipazione/{id}", method = RequestMethod.GET)
+	public String findAttivita(@PathVariable("id") Long id, Model model) {
+		this.attivitaCorrente = this.attivitaService.findById(id);
+		model.addAttribute("attivita", this.attivitaCorrente);
+		model.addAttribute("allievo", this.allievoCorrente);
+		return "partecipazione/confermaPartecipazione";
+	}
 
-		Allievo allievo = this.allievoService.findByNomeAndCognome(nome, cognome);
-		Attivita attivita = this.attivitaService.findByDescrizioneAndOraInizioAndOraFine(descrizione, oraInizio, oraFine);
-
-		if (this.allievoService.alreadyExists(allievo)) {
-			Partecipazione partecipazione = new Partecipazione(allievo, attivita);
-			this.ps.save(partecipazione);
-			model.addAttribute("partecipazione", partecipazione);
-			model.addAttribute("allievo", allievo);
-			model.addAttribute("listaAttivita", this.attivitaService.findAll());
-			return "partecipazione/showPartecipazione";
-		}
-		model.addAttribute("allievo", allievo);
-		model.addAttribute("listaAttivita", this.attivitaService.findAll());
-		return "partecipazione/inserisciPartecipazione";
+	@RequestMapping(value = "/savePartecipazione", method = RequestMethod.POST)
+	public String savePartecipazione(Model model) {
+		Partecipazione partecipazione = new Partecipazione(this.allievoCorrente, this.attivitaCorrente);
+		this.ps.save(partecipazione);
+		model.addAttribute("allievo", this.allievoCorrente);
+		return "allievo/showAllievo";
 	}
 
 }

@@ -3,6 +3,7 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <title>Allievo</title>
+<meta charset="UTF-8">
 </head>
 <body>
 	<div>
@@ -26,6 +27,7 @@
 			Luogo di Nascita : <span th:text="${allievo.luogoNascita}"></span>
 		</div>
 		<br>
+		<form th:action="@{'/partecipaAttivita' + '/' + ${allievo.id}}"><button type="submit">Partecipa Nuova Attivita</button></form>
 		<form th:action="@{'/modificaAllievo' + '/' + ${allievo.id}}"><button type="submit">Modifica Allievo</button></form>
 		<form th:action="@{'/cancellaAllievo' + '/' + ${allievo.id}}"><button type="submit">Cancella Allievo</button></form>
 		<form th:action="@{/inserisciAllievo}"><button type="submit">Inserisci Nuovo Allievo</button></form>
