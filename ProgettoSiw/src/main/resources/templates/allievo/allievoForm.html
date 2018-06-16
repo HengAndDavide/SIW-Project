@@ -24,7 +24,8 @@
 			</tr>
 			<tr>
 				<td>Data di Nascita :</td>
-				<td><input type="date" name="dataNascita" /></td>
+				<td><input type="date" th:field="*{dataNascita}" /></td>
+				<td th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}"></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
@@ -39,8 +40,7 @@
 			<tr>
 				<td>Luogo di Nascita :</td>
 				<td><input type="text" th:field="*{luogoNascita}" /></td>
-				<td th:if="${#fields.hasErrors('luogoNascita')}"
-					th:errors="*{luogoNascita}"></td>
+				<td th:if="${#fields.hasErrors('luogoNascita')}" th:errors="*{luogoNascita}"></td>
 			</tr>
 
 			<tr>

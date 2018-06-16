@@ -1,5 +1,6 @@
 package it.uniroma3.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class AllievoService {
 		else
 			return null;
 	}
-	
+
 	public Allievo findByNomeAndCognome(String nome, String cognome) {
 		Optional<Allievo> allievo = this.allievoRepository.findByNomeAndCognome(nome, cognome);
 		if (allievo.isPresent())
@@ -78,14 +79,15 @@ public class AllievoService {
 		return this.allievoRepository.save(allievo);
 	}
 
-	public Allievo update(Allievo allievoTrovato, String nome, String cognome, String email, String telefono,
-			String luogoNascita) {
-		allievoTrovato.setNome(nome);
-		allievoTrovato.setCognome(cognome);
-		allievoTrovato.setEmail(email);
-		allievoTrovato.setTelefono(telefono);
-		allievoTrovato.setLuogoNascita(luogoNascita);
-		return allievoTrovato;
+	public Allievo update(Allievo allievo, String nome, String cognome, String email, Date dataNascita,
+			String telefono, String luogoNascita) {
+		allievo.setNome(nome);
+		allievo.setCognome(cognome);
+		allievo.setEmail(email);
+		allievo.setDataNascita(dataNascita);
+		allievo.setTelefono(telefono);
+		allievo.setLuogoNascita(luogoNascita);
+		return allievo;
 	}
 
 	public void delete(Long id) {

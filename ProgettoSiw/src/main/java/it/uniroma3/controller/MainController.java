@@ -21,7 +21,7 @@ public class MainController {
 	private CentroFormazione centroFormazione;
 
 	@Autowired
-	private CentroFormazioneService centroFormazioneService;
+	private CentroFormazioneService cs;
 
 	@Autowired
 	private ResponsabileService r;

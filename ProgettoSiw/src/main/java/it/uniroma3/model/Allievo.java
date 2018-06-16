@@ -26,6 +26,7 @@ public class Allievo {
 	@Column(nullable = false)
 	private String cognome;
 
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date dataNascita;

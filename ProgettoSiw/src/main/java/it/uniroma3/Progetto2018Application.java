@@ -7,24 +7,27 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-import it.uniroma3.model.Responsabile;
+import it.uniroma3.model.CentroFormazione;
+import it.uniroma3.service.AllievoService;
+import it.uniroma3.service.AttivitaService;
+import it.uniroma3.service.CentroFormazioneService;
 //import it.uniroma3.service.CentroFormazioneService;
 import it.uniroma3.service.ResponsabileService;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class Progetto2018Application {
 
-	// @Autowired
-	// private AllievoService allievoService;
+	@Autowired
+	private AllievoService allievoService;
 
-	// @Autowired
-	// private AttivitaService attivitaService;
+	 @Autowired
+	 private AttivitaService attivitaService;
 
 	@Autowired
 	private ResponsabileService r;
 
-	// @Autowired
-	// private CentroFormazioneService CentroFormazioneService;
+	 @Autowired
+	 private CentroFormazioneService CentroFormazioneService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Progetto2018Application.class, args);
@@ -50,11 +53,19 @@ public class Progetto2018Application {
 		// allievoService.save(allievo);
 
 		// CentroFormazione centroFormazione = new CentroFormazione();
-		// centroFormazione.setNome("Pittura");
-		// centroFormazione.setEmail("pittura@centro.it");
+		// centroFormazione.setNome("Artistico");
+		// centroFormazione.setEmail("artistico@centro.it");
 		// centroFormazione.setIndirizzo("Via Arte");
 		// centroFormazione.setTelefono("06453453");
 		// centroFormazione.setCapienzaMassima(30);
+		// this.CentroFormazioneService.save(centroFormazione);
+		//
+		// centroFormazione = new CentroFormazione();
+		// centroFormazione.setNome("Sportivo");
+		// centroFormazione.setEmail("sportivo@centro.it");
+		// centroFormazione.setIndirizzo("Via sport");
+		// centroFormazione.setTelefono("0678653");
+		// centroFormazione.setCapienzaMassima(300);
 		// this.CentroFormazioneService.save(centroFormazione);
 
 		// Attivita attivita = new Attivita();

@@ -8,7 +8,8 @@
 <body>
 	<h4>Statistiche Azienda</h4>
 	<div>
-	
+		<p th:each="centro : ${classificaCentri}">
+			<span th:text="${centro.nome}"></span>
 	</div>
 </body>
 </html>

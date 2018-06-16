@@ -1,5 +1,7 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class AllievoController {
 
 	@Autowired
 	private AllievoValidator validator;
-	
+
 	@RequestMapping("/homeAllievo")
 	public String homeAllievo() {
 		return "allievo/gestioneAllievi";
@@ -100,9 +102,11 @@ public class AllievoController {
 	@RequestMapping(value = "/updateAllievo/{id}", method = RequestMethod.POST)
 	public String updateAllievo(@PathVariable("id") Long id, @RequestParam("nome") String nome,
 			@RequestParam("cognome") String cognome, @RequestParam("email") String email,
-			@RequestParam("telefono") String telefono, @RequestParam("luogoNascita") String luogoNascita, Model model) {
-		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email,
-				telefono, luogoNascita);
+			@RequestParam("dataNascita") Date dataNascita, @RequestParam("telefono") String telefono,
+			@RequestParam("luogoNascita") String luogoNascita, Model model) {
+		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), 
+				nome, cognome, email,
+				dataNascita, telefono, luogoNascita);
 		this.allievoService.uploadParametri(allievo);
 		this.allievoService.save(allievo);
 		model.addAttribute("allievo", allievo);
