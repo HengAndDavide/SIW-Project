@@ -31,7 +31,6 @@
 			<tr th:each="attivita : ${listaAttivita}">
 				<td><a th:href="@{'/findAttivitaId' + '/' + ${attivita.id}}">
 						<span th:text="${attivita.descrizione}"></span> 
-						€ : <span th:text="${attivita.prezzo}"></span> 
 						Dalle <span th:text="${attivita.oraInizio}"></span> 
 						Alle <span th:text="${attivita.oraFine}"></span>
 				</a></td>

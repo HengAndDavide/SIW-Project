@@ -96,9 +96,9 @@ public class AttivitaController {
 
 	@RequestMapping(value = "/updateAttivita/{id}", method = RequestMethod.POST)
 	public String updateAttivita(@PathVariable("id") Long id, @RequestParam("descrizione") String decrizione,
-			@RequestParam("prezzo") Double prezzo, 
+			@RequestParam("prezzo") Double prezzo, @RequestParam("dataAttivita") Date dataAttivita,
 			@RequestParam("oraInizio") Date oraInizio, @RequestParam("oraFine") Date oraFine, Model model) {
-		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo, oraInizio, oraFine);
+		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo, dataAttivita, oraInizio, oraFine);
 		this.attivitaService.uploadParametri(attivita);
 		this.attivitaService.save(attivita);
 		model.addAttribute("attivita", attivita);

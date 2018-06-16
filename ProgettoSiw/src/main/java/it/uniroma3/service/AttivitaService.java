@@ -100,9 +100,10 @@ public class AttivitaService {
 		return this.attivitaRepository.save(attivita);
 	}
 
-	public Attivita update(Attivita attivita, String descrizione, Double prezzo, Date oraInizio, Date oraFine) {
+	public Attivita update(Attivita attivita, String descrizione, Double prezzo, Date dataAttivita, Date oraInizio, Date oraFine) {
 		attivita.setDescrizione(descrizione);
 		attivita.setPrezzo(prezzo);
+		attivita.setDataAttivita(dataAttivita);
 		attivita.setOraInizio(oraInizio);
 		attivita.setOraFine(oraFine);
 		return attivita;

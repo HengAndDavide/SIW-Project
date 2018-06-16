@@ -15,13 +15,16 @@
 			Prezzo : <span th:text="${attivita.prezzo}"></span>
 		</div>
 		<div>
-			Centro Formazione : <span th:text="${attivita.centroFormazione}"></span>
+			Data : <span th:text="${attivita.dataAttivita}"></span>
 		</div>
 		<div>
 			Ora Inizio : <span th:text="${attivita.oraInizio}"></span>
 		</div>
 		<div>
 			Ora Fine : <span th:text="${attivita.oraFine}"></span>
+		</div>
+		<div>
+			Centro Formazione : <span th:text="${attivita.centroFormazione}"></span>
 		</div>
 		<br>
 		<form th:action="@{'/modificaAttivita' + '/' + ${attivita.id}}"><button type="submit">Modifica Attivita</button></form>

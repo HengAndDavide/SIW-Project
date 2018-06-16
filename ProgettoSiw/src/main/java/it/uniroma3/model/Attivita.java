@@ -27,6 +27,11 @@ public class Attivita {
 	@Column(nullable = false)
 	private double prezzo;
 
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date dataAttivita;
+
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date oraInizio;
@@ -41,19 +46,6 @@ public class Attivita {
 	private List<Partecipazione> listaPartecipazioni;
 
 	public Attivita() {
-	}
-
-	public Attivita(String descrizione, double prezzo) {
-		super();
-		this.descrizione = descrizione;
-		this.prezzo = prezzo;
-	}
-
-	public Attivita(String descrizione, double prezzo, CentroFormazione centroFormazione) {
-		super();
-		this.descrizione = descrizione;
-		this.prezzo = prezzo;
-		this.centroFormazione = centroFormazione;
 	}
 
 	public String getDescrizione() {
@@ -106,6 +98,14 @@ public class Attivita {
 
 	public void setOraFine(Date oraFine) {
 		this.oraFine = oraFine;
+	}
+	
+	public Date getDataAttivita() {
+		return dataAttivita;
+	}
+
+	public void setDataAttivita(Date dataAttivita) {
+		this.dataAttivita = dataAttivita;
 	}
 
 }

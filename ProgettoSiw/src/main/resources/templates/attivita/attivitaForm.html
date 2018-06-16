@@ -23,6 +23,12 @@
 				<td th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}"></td>
 			</tr>
 			<tr>
+				<td>Data di Attivita :</td>
+				<td><input type="date" th:field="*{dataAttivita}" /></td>
+				<td th:if="${#fields.hasErrors('dataAttivita')}"
+					th:errors="*{dataAttivita}"></td>
+			</tr>
+			<tr>
 				<td>Ora Inizio :</td>
 				<td><input type="time" th:field="*{oraInizio}" /></td>
 				<td th:if="${#fields.hasErrors('oraInizio')}" th:errors="*{oraInizio}"></td>
