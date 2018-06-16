@@ -45,6 +45,10 @@ public class CentroFormazione {
 		this.telefono = telefono;
 		this.capienzaMassima = capienzaMassima;
 	}
+	
+	public List<Attivita> getListaAttivita() {
+		return listaAttivita;
+	}
 
 	public String getNome() {
 		return nome;

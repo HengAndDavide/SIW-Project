@@ -1,5 +1,6 @@
 package it.uniroma3.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +32,9 @@ public class AttivitaService {
 			return null;
 	}
 
-	public Attivita findByDescrizione(String descrizione) {
-		Optional<Attivita> attivita = this.attivitaRepository.findByDescrizione(descrizione);
+	public Attivita findByDescrizioneAndOraInizioAndOraFine(String descrizione, Date oraInizio, Date oraFine) {
+		Optional<Attivita> attivita = this.attivitaRepository.findByDescrizioneAndOraInizioAndOraFine(descrizione,
+				oraInizio, oraFine);
 		if (attivita.isPresent())
 			return attivita.get();
 		else
@@ -63,16 +65,13 @@ public class AttivitaService {
 	}
 
 	public boolean alreadyExists(Attivita attivita) {
-		Optional<Attivita> attivitaTrovata = this.attivitaRepository.findByDescrizione(attivita.getDescrizione());
-		if (attivitaTrovata.isPresent())
-			return true;
-		else
-			return false;
+		Optional<Attivita> attivitaTrovata = this.attivitaRepository.findByDescrizioneAndOraInizioAndOraFine(
+				attivita.getDescrizione(), attivita.getOraInizio(), attivita.getOraFine());
+		return attivitaTrovata.isPresent();
 	}
 
 	// Metodi persistence
-	public Attivita save(Attivita attivita, CentroFormazione centroFormazione) {
-		attivita.setCentroFormazione(centroFormazione);
+	public Attivita save(Attivita attivita) {
 		return this.attivitaRepository.save(attivita);
 	}
 

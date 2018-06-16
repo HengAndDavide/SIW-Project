@@ -33,6 +33,14 @@ public class AllievoService {
 		else
 			return null;
 	}
+	
+	public Allievo findByNomeAndCognome(String nome, String cognome) {
+		Optional<Allievo> allievo = this.allievoRepository.findByNomeAndCognome(nome, cognome);
+		if (allievo.isPresent())
+			return allievo.get();
+		else
+			return null;
+	}
 
 	public List<Allievo> findByLuogoNascita(String luogoNascita) {
 		return this.allievoRepository.findByLuogoNascita(luogoNascita);

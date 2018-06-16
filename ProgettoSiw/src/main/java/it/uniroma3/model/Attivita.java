@@ -1,5 +1,6 @@
 package it.uniroma3.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Attivita {
@@ -20,6 +26,13 @@ public class Attivita {
 	private String descrizione;
 	@Column(nullable = false)
 	private double prezzo;
+
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date oraInizio;
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date oraFine;
 
 	@ManyToOne
 	private CentroFormazione centroFormazione;
@@ -77,6 +90,22 @@ public class Attivita {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Date getOraInizio() {
+		return oraInizio;
+	}
+
+	public void setOraInizio(Date oraInizio) {
+		this.oraInizio = oraInizio;
+	}
+
+	public Date getOraFine() {
+		return oraFine;
+	}
+
+	public void setOraFine(Date oraFine) {
+		this.oraFine = oraFine;
 	}
 
 }

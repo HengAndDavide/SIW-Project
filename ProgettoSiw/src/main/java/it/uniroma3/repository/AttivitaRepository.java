@@ -1,5 +1,6 @@
 package it.uniroma3.repository;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -10,6 +11,6 @@ public interface AttivitaRepository extends CrudRepository<Attivita, Long> {
 
 	public Optional<Attivita> findById(Long id);
 
-	public Optional<Attivita> findByDescrizione(String descrizione);
+	public Optional<Attivita> findByDescrizioneAndOraInizioAndOraFine(String descrizione, Date oraInizio, Date oraFine);
 
 }

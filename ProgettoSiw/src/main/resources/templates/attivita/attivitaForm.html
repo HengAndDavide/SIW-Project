@@ -23,6 +23,14 @@
 				<td th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}"></td>
 			</tr>
 			<tr>
+				<td>Ora Inizio :</td>
+				<td><input type="time" name="oraInizio" /></td>
+			</tr>
+			<tr>
+				<td>Ora Fine :</td>
+				<td><input type="time" name="oraFine" /></td>
+			</tr>
+			<tr>
 				<td><button type="submit">Registra Attivita</button></td>
 			</tr>
 		</table>

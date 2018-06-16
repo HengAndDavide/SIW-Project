@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.model.Allievo;
 import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.repository.CentroFormazioneRepository;
 
@@ -71,6 +72,10 @@ public class CentroFormazioneService {
 		else
 			return false;
 	}
+	
+	public CentroFormazione save(CentroFormazione centroFormazione) {
+		return this.centroRepository.save(centroFormazione);
+	}
 
 	public CentroFormazione update(CentroFormazione CentroFormazioneTrovato, String nome, String indirizzo,
 			String email, String telefono, int capienzaMassima) {
@@ -80,6 +85,10 @@ public class CentroFormazioneService {
 		CentroFormazioneTrovato.setTelefono(telefono);
 		CentroFormazioneTrovato.setCapienzaMassima(capienzaMassima);
 		return CentroFormazioneTrovato;
+	}
+	
+	public void delete(Long id) {
+		this.centroRepository.deleteById(id);
 	}
 
 }

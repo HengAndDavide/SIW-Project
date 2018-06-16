@@ -24,7 +24,7 @@ public class AllievoController {
 
 	@Autowired
 	private AllievoValidator validator;
-
+	
 	@RequestMapping("/homeAllievo")
 	public String homeAllievo() {
 		return "allievo/gestioneAllievi";
@@ -49,7 +49,7 @@ public class AllievoController {
 				return "allievo/allievoForm";
 			} else {
 				this.allievoService.save(allievo);
-				model.addAttribute("allievoTrovato", allievo);
+				model.addAttribute("allievo", allievo);
 				return "allievo/showAllievo";
 			}
 		}
@@ -74,7 +74,7 @@ public class AllievoController {
 				model.addAttribute("notexists", "Allievo non esiste");
 				return "allievo/findAllievo";
 			} else {
-				model.addAttribute("allievoTrovato", allievoTrovato);
+				model.addAttribute("allievo", allievoTrovato);
 				return "allievo/showAllievo";
 			}
 		}
@@ -85,14 +85,14 @@ public class AllievoController {
 	// Search Allievo tramite ID
 	@RequestMapping(value = "/findAllievoId/{id}", method = RequestMethod.GET)
 	public String findAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
+		model.addAttribute("allievo", this.allievoService.findById(id));
 		return "allievo/showAllievo";
 	}
 
 	// Modifica Allievo tramite id Supporto
 	@RequestMapping(value = "/modificaAllievo/{id}", method = RequestMethod.GET)
 	public String modificaAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
+		model.addAttribute("allievo", this.allievoService.findById(id));
 		return "allievo/mergeAllievo";
 	}
 
@@ -105,7 +105,7 @@ public class AllievoController {
 				telefono, luogoNascita);
 		this.allievoService.uploadParametri(allievo);
 		this.allievoService.save(allievo);
-		model.addAttribute("allievoTrovato", allievo);
+		model.addAttribute("allievo", allievo);
 		return "allievo/showAllievo";
 	}
 

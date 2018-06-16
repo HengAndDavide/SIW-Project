@@ -1,5 +1,7 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +51,8 @@ public class AttivitaController {
 				model.addAttribute("exists", "Attivita esiste gia'");
 				return "attivita/attivitaForm";
 			} else {
-				this.attivitaService.save(attivita, mainController.getCentroFormazione());
-				model.addAttribute("attivitaTrovata", attivita);
+				this.attivitaService.save(attivita);
+				model.addAttribute("attivita", attivita);
 				return "attivita/showAttivita";
 			}
 		}
@@ -63,16 +65,18 @@ public class AttivitaController {
 	}
 
 	@RequestMapping(value = "/findAttivita")
-	public String findAttivita(@RequestParam("descrizione") String descrizione, Model model) {
+	public String findAttivita(@RequestParam("descrizione") String descrizione,
+			@RequestParam("oraInizio") Date oraInizio, @RequestParam("oraFine") Date oraFine, Model model) {
 
 		if (!descrizione.equals("") && descrizione != null) {
 			this.attivitaService.uploadString(descrizione);
-			Attivita attivitaTrovato = this.attivitaService.findByDescrizione(descrizione);
-			if (attivitaTrovato == null) {
+			Attivita attivitaTrovata = this.attivitaService.findByDescrizioneAndOraInizioAndOraFine(descrizione,
+					oraInizio, oraFine);
+			if (attivitaTrovata == null) {
 				model.addAttribute("notexists", "Attivita non esiste");
 				return "attivita/findAttivita";
 			} else {
-				model.addAttribute("attivitaTrovato", attivitaTrovato);
+				model.addAttribute("attivita", attivitaTrovata);
 				return "attivita/showAttivita";
 			}
 		}
@@ -82,13 +86,13 @@ public class AttivitaController {
 
 	@RequestMapping(value = "/findAttivitaId/{id}", method = RequestMethod.GET)
 	public String findAttivita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("attivitaTrovata", this.attivitaService.findById(id));
+		model.addAttribute("attivita", this.attivitaService.findById(id));
 		return "attivita/showAttivita";
 	}
 
 	@RequestMapping(value = "/modificaAttivita/{id}", method = RequestMethod.GET)
 	public String modificaAttivita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("attivitaTrovato", this.attivitaService.findById(id));
+		model.addAttribute("attivita", this.attivitaService.findById(id));
 		return "attivita/mergeAttivita";
 	}
 
@@ -97,8 +101,8 @@ public class AttivitaController {
 			@RequestParam("prezzo") Double prezzo, Model model) {
 		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo);
 		this.attivitaService.uploadParametri(attivita);
-		this.attivitaService.save(attivita, mainController.getCentroFormazione());
-		model.addAttribute("attivitaTrovata", attivita);
+		this.attivitaService.save(attivita);
+		model.addAttribute("attivita", attivita);
 		return "attivita/showAttivita";
 	}
 
