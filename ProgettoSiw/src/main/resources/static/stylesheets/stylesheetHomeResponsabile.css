@@ -37,7 +37,7 @@ strong {
 }
 
 a {
-	color: #2C383B;
+	color: #0080c0;
 }
 
 a:hover {
@@ -514,7 +514,8 @@ ul.contact li a.icon-rss:before {
 }
 
 #featured .main-title h2 {
-	font-size: 2em;
+	font-size: 3em;
+	color:black;
 }
 
 #featured .main-title .byline {

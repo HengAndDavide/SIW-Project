@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+	<head>
+		<title>formAllievo</title> 
+		
+		<link rel="stylesheet" href="stylesheets/stylesheetFormAllievo.css" type="text/css" />
+		
+	
+	</head>
+	
+	
+	<body>
+
+
+	 
+	 <div id="inizio">
+		
+		<h1 class="noiscrizione">Iscrivi un nuovo allievo</h1>
+   
+       
+       </div>
+
+
+
+        <!-- Genera il form con i campi di inserimento dei dati di accesso di autore e di e-mail-->
+		<form id="Persone" action="" method="post" onsubmit="return verificaclient()">
+          
+          <!--Genera la maschera con i campi di inserimento dei dati di accesso di autore -->
+          <fieldset>
+
+            <input id="nome" name="nome" placeholder="Nome" required><br>
+            
+            <input id="cognome" name="cognome" placeholder="Cognome" required><br>
+            
+            <input id="email" type="email" name="email" placeholder="Email" required><br>
+            
+            <input id="telefono" name="telefono" placeholder="Telefono" required><br>
+            
+            <input id="nascita" type="date" name="data" placeholder="Data di Nascita" required><br>
+            
+            <input id="luogo" name="luogo" placeholder="Luogo di nascita" required><br>
+            
+            
+            <button id="email" class="button" type="submit">Iscrivi</button>
+            
+          </fieldset>
+
+          
+         </form>
+         
+         
+  
+  	 <div id="fine">
+
+      	
+      	 <!-- nota per regolare la partecipazione -->
+        	<p>
+				Questi dati devono essere richiesti all'allievo, 
+				al momento dell'iscrizione.
+     		</p>    
+       
+       </div>        
+         
+         
+         
+ 
+	</body>
+</html>
