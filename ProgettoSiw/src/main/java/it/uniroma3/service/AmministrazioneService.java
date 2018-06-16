@@ -26,7 +26,10 @@ public class AmministrazioneService {
 		for (CentroFormazione centro : this.centri) {
 			for (Attivita attivita : centro.getListaAttivita()) {
 				int n = attivita.getListaPartecipazioni().size();
-				centro2Integer.put(centro, n);
+				if (!centro2Integer.containsKey(centro))
+					centro2Integer.put(centro, n);
+				else
+					centro2Integer.put(centro, centro2Integer.get(centro) + n);
 			}
 		}
 		return centro2Integer;

@@ -11,19 +11,25 @@
 		<div>
 			<table>
 				<tr>
-					<th>Nome : </th>
+					<th>Nome :</th>
 				</tr>
 				<tr th:each="attivita : ${listaAttivita}">
 					<td><a th:href="@{'/findAttivitaId' + '/' + ${attivita.id}}">
-						<span th:text="${attivita.descrizione}"></span>
-						<span th:text="${attivita.prezzo}"></span>
-						<span th:text="${attivita.centroFormazione}"></span></a></td>
+							<span th:text="${attivita.descrizione}"></span> 
+							€ : <span th:text="${attivita.prezzo}"></span> 
+							Dalle <span th:text="${attivita.oraInizio}"></span> 
+							Alle <span th:text="${attivita.oraFine}"></span>
+					</a></td>
 				</tr>
 			</table>
 		</div>
 		<br>
-		<form th:action="@{/inserisciAttivita}"><button type="submit">Inserisci Nuovo Attivita</button></form>
-		<form th:action="@{/homeAttivita}" method="GET"><button type="submit">Gestione Attivita</button></form>
+		<form th:action="@{/inserisciAttivita}">
+			<button type="submit">Inserisci Nuovo Attivita</button>
+		</form>
+		<form th:action="@{/homeAttivita}" method="GET">
+			<button type="submit">Gestione Attivita</button>
+		</form>
 	</div>
 </body>
 </html>

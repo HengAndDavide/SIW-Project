@@ -65,13 +65,11 @@ public class AttivitaController {
 	}
 
 	@RequestMapping(value = "/findAttivita")
-	public String findAttivita(@RequestParam("descrizione") String descrizione,
-			@RequestParam("oraInizio") Date oraInizio, @RequestParam("oraFine") Date oraFine, Model model) {
+	public String findAttivita(@RequestParam("descrizione") String descrizione,	Model model) {
 
 		if (!descrizione.equals("") && descrizione != null) {
-			this.attivitaService.uploadString(descrizione);
-			Attivita attivitaTrovata = this.attivitaService.findByDescrizioneAndOraInizioAndOraFine(descrizione,
-					oraInizio, oraFine);
+			descrizione = this.attivitaService.uploadString(descrizione);
+			Attivita attivitaTrovata = this.attivitaService.findByDescrizione(descrizione);
 			if (attivitaTrovata == null) {
 				model.addAttribute("notexists", "Attivita non esiste");
 				return "attivita/findAttivita";
@@ -98,8 +96,9 @@ public class AttivitaController {
 
 	@RequestMapping(value = "/updateAttivita/{id}", method = RequestMethod.POST)
 	public String updateAttivita(@PathVariable("id") Long id, @RequestParam("descrizione") String decrizione,
-			@RequestParam("prezzo") Double prezzo, Model model) {
-		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo);
+			@RequestParam("prezzo") Double prezzo, 
+			@RequestParam("oraInizio") Date oraInizio, @RequestParam("oraFine") Date oraFine, Model model) {
+		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo, oraInizio, oraFine);
 		this.attivitaService.uploadParametri(attivita);
 		this.attivitaService.save(attivita);
 		model.addAttribute("attivita", attivita);

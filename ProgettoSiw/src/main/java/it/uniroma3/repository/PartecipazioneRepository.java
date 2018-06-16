@@ -1,4 +1,4 @@
-package it.uniroma3.service;
+package it.uniroma3.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

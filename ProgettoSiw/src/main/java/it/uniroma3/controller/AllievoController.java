@@ -1,6 +1,7 @@
 package it.uniroma3.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,16 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.controller.validator.AllievoValidator;
 import it.uniroma3.model.Allievo;
+import it.uniroma3.model.Attivita;
 import it.uniroma3.service.AllievoService;
+import it.uniroma3.service.PartecipazioneService;
 
 @Controller
 public class AllievoController {
 
 	@Autowired
 	private AllievoService allievoService;
+	
+	@Autowired
+	private PartecipazioneService ps;
 
 	@Autowired
 	private AllievoValidator validator;
+	
+	@RequestMapping("/pagamento")
+	public String pagamento() {
+		return "allievo/findAllievo";
+	}
 
 	@RequestMapping("/homeAllievo")
 	public String homeAllievo() {
@@ -52,6 +63,8 @@ public class AllievoController {
 			} else {
 				this.allievoService.save(allievo);
 				model.addAttribute("allievo", allievo);
+				List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+				model.addAttribute("listaAttivita", listaAttivita);
 				return "allievo/showAllievo";
 			}
 		}
@@ -70,13 +83,15 @@ public class AllievoController {
 
 		if (!email.equals("") && email != null) {
 
-			Allievo allievoTrovato = this.allievoService.findByEmail(email.toLowerCase());
+			Allievo allievo = this.allievoService.findByEmail(email.toLowerCase());
 
-			if (allievoTrovato == null) {
+			if (allievo == null) {
 				model.addAttribute("notexists", "Allievo non esiste");
 				return "allievo/findAllievo";
 			} else {
-				model.addAttribute("allievo", allievoTrovato);
+				List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+				model.addAttribute("listaAttivita", listaAttivita);
+				model.addAttribute("allievo", allievo);
 				return "allievo/showAllievo";
 			}
 		}
@@ -87,7 +102,10 @@ public class AllievoController {
 	// Search Allievo tramite ID
 	@RequestMapping(value = "/findAllievoId/{id}", method = RequestMethod.GET)
 	public String findAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievo", this.allievoService.findById(id));
+		Allievo allievo = this.allievoService.findById(id);
+		model.addAttribute("allievo", allievo);
+		List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+		model.addAttribute("listaAttivita", listaAttivita);
 		return "allievo/showAllievo";
 	}
 
@@ -110,6 +128,8 @@ public class AllievoController {
 		this.allievoService.uploadParametri(allievo);
 		this.allievoService.save(allievo);
 		model.addAttribute("allievo", allievo);
+		List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+		model.addAttribute("listaAttivita", listaAttivita);
 		return "allievo/showAllievo";
 	}
 

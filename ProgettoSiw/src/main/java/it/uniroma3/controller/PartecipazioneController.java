@@ -1,5 +1,7 @@
 package it.uniroma3.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,8 @@ public class PartecipazioneController {
 	@RequestMapping("/partecipaAttivita/{id}")
 	private String insPartecipazione(@PathVariable("id") Long id, Model model) {
 		this.allievoCorrente = this.allievoService.findById(id);
-		model.addAttribute("listaAttivita", this.attivitaService.findAll());
+		List<Attivita> listaAttivita = this.attivitaService.getListaAttivitaPossibili(this.allievoCorrente);
+		model.addAttribute("listaAttivita", listaAttivita);
 		return "partecipazione/attivitaList";
 	}
 

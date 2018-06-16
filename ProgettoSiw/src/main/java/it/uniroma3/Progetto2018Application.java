@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.service.AllievoService;
 import it.uniroma3.service.AttivitaService;
 import it.uniroma3.service.CentroFormazioneService;

@@ -15,14 +15,19 @@
 	</div>
 	Attivita :
 	<div>
-		Descrizione : <span th:text="${attivitaTrovata.descrizione}"></span>
+		Descrizione : <span th:text="${attivita.descrizione}"></span>
 	</div>
 	<div>
-		Prezzo : <span th:text="${attivitaTrovata.prezzo}"></span>
+		Prezzo : <span th:text="${attivita.prezzo}"></span>
 	</div>
 	<div>
-		Centro Formazione : <span
-			th:text="${attivitaTrovata.centroFormazione}"></span>
+		Ora Inizio : <span th:text="${attivita.oraInizio}"></span>
+	</div>
+	<div>
+		Ora Fine : <span th:text="${attivita.oraFine}"></span>
+	</div>
+	<div>
+		Centro Formazione : <span th:text="${attivita.centroFormazione}"></span>
 	</div>
 </body>
 </html>

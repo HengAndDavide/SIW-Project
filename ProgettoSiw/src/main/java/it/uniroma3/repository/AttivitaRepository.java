@@ -13,4 +13,6 @@ public interface AttivitaRepository extends CrudRepository<Attivita, Long> {
 
 	public Optional<Attivita> findByDescrizioneAndOraInizioAndOraFine(String descrizione, Date oraInizio, Date oraFine);
 
+	public Optional<Attivita> findByDescrizione(String descrizione);
+
 }

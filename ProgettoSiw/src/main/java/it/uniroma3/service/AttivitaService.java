@@ -1,5 +1,6 @@
 package it.uniroma3.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.controller.MainController;
+import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
-import it.uniroma3.model.CentroFormazione;
+import it.uniroma3.model.Partecipazione;
 import it.uniroma3.repository.AttivitaRepository;
+import it.uniroma3.repository.PartecipazioneRepository;
 
 @Transactional
 @Service
@@ -21,12 +24,23 @@ public class AttivitaService {
 	private AttivitaRepository attivitaRepository;
 
 	@Autowired
+	private PartecipazioneRepository pr;
+
+	@Autowired
 	private MainController mainController;
 
 	// Metodi di ricerca
 	public Attivita findById(Long id) {
 		Optional<Attivita> attivita = this.attivitaRepository.findById(id);
 		if (attivita.isPresent() && veroCentro(attivita.get()))
+			return attivita.get();
+		else
+			return null;
+	}
+	
+	public Attivita findByDescrizione(String descrizione) {
+		Optional<Attivita> attivita = this.attivitaRepository.findByDescrizione(descrizione);
+		if (attivita.isPresent())
 			return attivita.get();
 		else
 			return null;
@@ -70,15 +84,28 @@ public class AttivitaService {
 		return attivitaTrovata.isPresent();
 	}
 
+	public List<Attivita> getListaAttivitaPossibili(Allievo allievoCorrente) {
+		List<Partecipazione> listaPAllievo = allievoCorrente.getListaPartecipazione();
+		List<Partecipazione> listaPartecipazioni = (List<Partecipazione>) this.pr.findAll();
+		List<Attivita> listaAttivita = new ArrayList<>();
+		for (Partecipazione p : listaPartecipazioni) {
+			if (!listaPAllievo.contains(p))
+				listaAttivita.add(p.getAttivita());
+		}
+		return listaAttivita;
+	}
+
 	// Metodi persistence
 	public Attivita save(Attivita attivita) {
 		return this.attivitaRepository.save(attivita);
 	}
 
-	public Attivita update(Attivita attivitaTrovata, String descrizione, Double prezzo) {
-		attivitaTrovata.setDescrizione(descrizione);
-		attivitaTrovata.setPrezzo(prezzo);
-		return attivitaTrovata;
+	public Attivita update(Attivita attivita, String descrizione, Double prezzo, Date oraInizio, Date oraFine) {
+		attivita.setDescrizione(descrizione);
+		attivita.setPrezzo(prezzo);
+		attivita.setOraInizio(oraInizio);
+		attivita.setOraFine(oraFine);
+		return attivita;
 	}
 
 	public void delete(Long id) {
