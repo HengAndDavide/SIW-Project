@@ -1,7 +1,7 @@
 Progetto Siw 2017 - 2018
 
 PROGETTO:
-Se una persona si iscrive ad un centro,se Ë iscritto ad un altro centro,le sue credenziali vengono recuperate.
+Se una persona si iscrive ad un centro,se √® iscritto ad un altro centro,le sue credenziali vengono recuperate.
 Due utenti:responsabili del centro,gestore del centro(non allievo).
 
 	UC 1 : Gestione Allievo - Attore primario: Responsabile Centro
@@ -12,31 +12,31 @@ Due utenti:responsabili del centro,gestore del centro(non allievo).
 		4. Il Responsabile puo anche modificare i dati di un Allievo.
 		5. Il Responsabile puo anche cancellare i dati di un Allievo.
 
-	UC 2 : Gestione Iscrizione Attivit‡ ñ Attore primario : Responsabile Centro
-		1. Il Responsabile controlla se il Centro ha raggiunto la sua massima capacit‡, il sistema manda un messaggio errore.
+	UC 2 : Gestione Iscrizione Attivit√† ‚Äì Attore primario : Responsabile Centro
+		1. Il Responsabile controlla se il Centro ha raggiunto la sua massima capacit√†, il sistema manda un messaggio errore.
 		2. Il Responsabile Centro accede al sistema e inserisce i dati dell' Allievo.
 			vengono recuperate le sue credenziali.
-		3. Il Responsabile informa l' Allievo delle Attivit‡ disponibili.
-		4. Il Responsabile iscrive l' Allievo all' Attivit‡ scelta.
-			(4.1 Se l' Allievo scegli un' Attivit‡ che va in conflitto (Orario) 
+		3. Il Responsabile informa l' Allievo delle Attivit√† disponibili.
+			3.1 Vengono visualizzate una lista di attivita sottoscrivibile dall'utente 
+				(quelle a cui √® gia iscritto non vengono visualizzate).
+		4. Il Responsabile iscrive l' Allievo all' Attivit√† scelta.
+			(4.1 Se l' Allievo scegli un' Attivit√† che va in conflitto (Orario) 
 				con un'altro scelto in precedenza, il sistema manda un messaggio errore.)
 
-	UC 3 : Gestione Attivit‡ Azienda - Attore Primario : Direttore
-		1. Il Direttore accede al sistema e crea una nuova Attivit‡
-			1.1 Viene visualizzato una lista di giorni e orari liberi.
-		2. Il Direttore accede al sistema e apporta modifiche a un' Attivit‡
-		3. Il Direttore accede al sistema e puo cancellare un' Attivit‡
+	UC 3 : Gestione Attivit√† Azienda - Attore Primario : Direttore
+		1. Il Direttore accede al sistema e crea una nuova Attivit√†
+		2. Il Direttore accede al sistema e apporta modifiche a un' Attivit√†
+		3. Il Direttore accede al sistema e puo cancellare un' Attivit√†
 
 	UC 4 : Gestione Rendimento Azienda - Attore Primario : Direttore
-		1. Viene stampato la classifica (per numero Utenti) delle Attivit‡ di un Centro.
-			1.1 Relativa a ogni Attivit‡, stampare anche il numero di partecipanti.
-		2. Viene stampato la classifica (per ricavi) delle Attivit‡ di un Centro.
-			2.1 Relativa a ogni Attivit‡, stampare anche il numero di partecipanti.
+		1. Viene stampato la classifica (per numero Utenti) delle Attivit√† di un Centro.
+			1.1 Relativa a ogni Attivit√†, stampare anche il numero di partecipanti.
+		2. Viene stampato la classifica (per ricavi) delle Attivit√† di un Centro.
+			2.1 Relativa a ogni Attivit√†, stampare anche il numero di partecipanti.
 		3. Viene stampa la classifica per ricavi dei Centri dell' Azienda.
 
 	UC 5 : Gestione Pagamento - Attore Primario : Direttore
-      		1. Il Direttore usa il sistema per controllare se l' Allievo del centro ha pagato correttamente 
-			il prezzo (mensile) delle attivit‡ a cui Ë iscritto.
-		2. Il Direttore chiede all'allievo di pagare il prezzo delle Attivit‡ non pagate.
-		3. L' Allievo paga ciÚ che Ë richiesto.
+      		1. Il Direttore usa il sistema per controllare quando deve pagare l'Allievo per le attivit√† a cui √® iscritto.
+		2. Il Direttore chiede all'allievo di pagare il prezzo delle Attivit√† non pagate.
+		3. L' Allievo paga ci√≤ che √® richiesto.
 		4. Il Direttore usa il sistema per saldare il debito.
