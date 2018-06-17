@@ -14,7 +14,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Attivita {
@@ -27,7 +26,6 @@ public class Attivita {
 	@Column(nullable = false)
 	private double prezzo;
 
-	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date dataAttivita;

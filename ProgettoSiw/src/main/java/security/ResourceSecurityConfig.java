@@ -11,9 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import it.uniroma3.service.ResponsabileDetailsService;
 
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class ResourceSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -31,16 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	    http
-	    .authorizeRequests()
-	    .antMatchers("/").permitAll()
-	    .antMatchers("/admin/**").hasRole("admin")
+	    http.authorizeRequests()
+	    .antMatchers("/").hasRole("admin")
 	    .and()
 	    .formLogin()
-	    .loginPage("/login2")
+	    .loginPage("/login")
 	    .and()
 	    .logout().permitAll().logoutSuccessUrl("/login")
 	    .and()
 	    .csrf().disable();
 	  }
+
 }

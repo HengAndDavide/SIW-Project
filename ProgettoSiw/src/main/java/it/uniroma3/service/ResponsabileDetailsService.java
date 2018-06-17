@@ -20,18 +20,19 @@ public class ResponsabileDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		Optional<Responsabile> responsabile = this.responsabileService.findByUsername(username);
+		
+		Optional<Responsabile> responsabile = responsabileService.findByUsername(username);
 
 		UserBuilder builder = null;
 		if (responsabile.isPresent()) {
 			builder = org.springframework.security.core.userdetails.User.withUsername(username);
 			builder.password(new BCryptPasswordEncoder().encode(responsabile.get().getPassword()));
-			builder.roles(responsabile.get().getRuolo());
+			builder.roles(responsabile.get().getRole().getRole());
 		} else {
 			throw new UsernameNotFoundException("User not found.");
 		}
 
 		return builder.build();
 	}
+	
 }

@@ -40,7 +40,7 @@ public class MainController {
 	public String login2(@RequestParam("username") String username, @RequestParam("password") String password,
 			Model model, BindingResult br) {
 		if (!br.hasErrors()) {
-			Optional<Responsabile> responsabile = this.r.findByUsername(username);
+			Optional<Responsabile> responsabile = this.r.findByUsernameAndPassword(username, password);
 			if (responsabile == null) {
 				model.addAttribute("notesiste", "Dati Errati");
 				return "login2";

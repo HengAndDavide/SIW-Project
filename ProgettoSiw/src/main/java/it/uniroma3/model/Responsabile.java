@@ -1,57 +1,95 @@
 package it.uniroma3.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "responsabile")
 public class Responsabile {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@Column(nullable = false)
-	private String cognome;
-	@Column(nullable = false)
+	private int id;
+
+	@Column(name = "nome")
 	private String nome;
-	@Column(nullable = false, unique = true)
+	@Column(name = "cognome")
+	private String cognome;
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "username")
 	private String username;
-	@Column(nullable = false)
+	@Column(name = "password")
 	private String password;
-	@Column(nullable = false)
-	private String ruolo;
-	
+
 	@OneToOne
 	private CentroFormazione centroFormazione;
+
+	@OneToOne()
+	private Role role;
 
 	public Responsabile() {
 	}
 
-	public Responsabile(String nome, String cognome, String username, String password, String role) {
-		this.cognome = cognome;
-		this.nome = nome;
-		this.username = username;
+	public Responsabile(Responsabile responsabile) {
+
+		this.email = responsabile.email;
+		this.id = responsabile.id;
+		this.nome = responsabile.nome;
+		this.cognome = responsabile.cognome;
+		this.username = responsabile.username;
+		this.password = responsabile.password;
+		this.role = responsabile.role;
+
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String name) {
+		this.username = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
 		this.password = password;
-		this.ruolo = role;
 	}
 
-	public boolean checkPassword(String email, String psw) {
-		return this.password.equals(psw) && this.username.equals(email);
+	public Role getRole() {
+		return role;
 	}
 
-	public void nuovaPassword(String psw) {
-		this.password = psw;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getNome() {
@@ -62,25 +100,14 @@ public class Responsabile {
 		this.nome = nome;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getCognome() {
+		return cognome;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
 	}
 
-	public CharSequence getPassword() {
-		return this.password;
-	}
-
-	public String getRuolo() {
-		return this.ruolo;
-	}
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
-	}
-	
 	public CentroFormazione getCentroFormazione() {
 		return centroFormazione;
 	}
@@ -88,6 +115,4 @@ public class Responsabile {
 	public void setCentroFormazione(CentroFormazione centroFormazione) {
 		this.centroFormazione = centroFormazione;
 	}
-
-
 }

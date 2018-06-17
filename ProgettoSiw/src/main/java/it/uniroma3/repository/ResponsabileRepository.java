@@ -10,4 +10,6 @@ public interface ResponsabileRepository extends CrudRepository<Responsabile, Lon
 
 	public Optional<Responsabile> findByUsername(String username);
 
+	public Optional<Responsabile> findByUsernameAndPassword(String username, String password);
+
 }

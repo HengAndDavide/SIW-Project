@@ -28,4 +28,12 @@ public class ResponsabileService {
 		return this.responsabileRepository.save(responsabile);
 	}
 
+	public Optional<Responsabile> findByUsernameAndPassword(String username, String password) {
+		Optional<Responsabile> responsabile = this.responsabileRepository.findByUsernameAndPassword(username, password);
+		if (responsabile.isPresent())
+			return responsabile;
+		else
+			return null;
+	}
+
 }

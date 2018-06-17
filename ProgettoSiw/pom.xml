@@ -9,6 +9,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	<name>progetto-siw</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -87,5 +88,4 @@
 	</build>
 
 
-	<name>progetto-siw</name>
 </project>
