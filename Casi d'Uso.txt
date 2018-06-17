@@ -1,0 +1,42 @@
+Progetto Siw 2017 - 2018
+
+PROGETTO:
+Se una persona si iscrive ad un centro,se è iscritto ad un altro centro,le sue credenziali vengono recuperate.
+Due utenti:responsabili del centro,gestore del centro(non allievo).
+
+	UC 1 : Gestione Allievo - Attore primario: Responsabile Centro
+		1. Un Allievo si reca per la prima volta ad un Centro e richiede l' iscrizione.
+		2. Il Responsabile chiede all' Allievo i dati necessari per la prima iscrizione : nome, cognome,
+			email, telefono, data e luogo di nascita.
+		3. Il Responsabile inserisce i dati nel sistema e registra l' Allievo all' Azienda che gestisce i Centri.
+		4. Il Responsabile puo anche modificare i dati di un Allievo.
+		5. Il Responsabile puo anche cancellare i dati di un Allievo.
+
+	UC 2 : Gestione Iscrizione Attività – Attore primario : Responsabile Centro
+		1. Il Responsabile controlla se il Centro ha raggiunto la sua massima capacità, il sistema manda un messaggio errore.
+		2. Il Responsabile Centro accede al sistema e inserisce i dati dell' Allievo.
+			vengono recuperate le sue credenziali.
+		3. Il Responsabile informa l' Allievo delle Attività disponibili.
+		4. Il Responsabile iscrive l' Allievo all' Attività scelta.
+			(4.1 Se l' Allievo scegli un' Attività che va in conflitto (Orario) 
+				con un'altro scelto in precedenza, il sistema manda un messaggio errore.)
+
+	UC 3 : Gestione Attività Azienda - Attore Primario : Direttore
+		1. Il Direttore accede al sistema e crea una nuova Attività
+			1.1 Viene visualizzato una lista di giorni e orari liberi.
+		2. Il Direttore accede al sistema e apporta modifiche a un' Attività
+		3. Il Direttore accede al sistema e puo cancellare un' Attività
+
+	UC 4 : Gestione Rendimento Azienda - Attore Primario : Direttore
+		1. Viene stampato la classifica (per numero Utenti) delle Attività di un Centro.
+			1.1 Relativa a ogni Attività, stampare anche il numero di partecipanti.
+		2. Viene stampato la classifica (per ricavi) delle Attività di un Centro.
+			2.1 Relativa a ogni Attività, stampare anche il numero di partecipanti.
+		3. Viene stampa la classifica per ricavi dei Centri dell' Azienda.
+
+	UC 5 : Gestione Pagamento - Attore Primario : Direttore
+      		1. Il Direttore usa il sistema per controllare se l' Allievo del centro ha pagato correttamente 
+			il prezzo (mensile) delle attività a cui è iscritto.
+		2. Il Direttore chiede all'allievo di pagare il prezzo delle Attività non pagate.
+		3. L' Allievo paga ciò che è richiesto.
+		4. Il Direttore usa il sistema per saldare il debito.
