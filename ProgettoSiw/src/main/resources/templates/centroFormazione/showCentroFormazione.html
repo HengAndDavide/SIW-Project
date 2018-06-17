@@ -3,6 +3,7 @@
 	xmlns="http://www.w3.org/1999/html">
 <head>
 <title>Centro Formazione</title>
+<meta charset="UTF-8">
 </head>
 <body>
 	<div>
@@ -24,10 +25,7 @@
 		</div>
 		<br>
 		<form th:action="@{'/modificaCentroFormazione' + '/' + ${centroFormazioneTrovato.id}}">
-		<button type="submit">Modifica Centro Formazione</button></form>
-		<form th:action="@{'/cancellaCentroFormazione' + '/' + ${centroFormazioneTrovato.id}}"><button type="submit">Cancella Centro Formazione</button></form>
-		<form th:action="@{/inserisciCentroFormazione}"><button type="submit">Inserisci Nuovo Centro Formazione</button></form>
-		<form th:action="@{/listaCentriFormazione}"><button type="submit">Lista Tutti Centri Formazione</button></form>
+			<button type="submit">Modifica Centro Formazione</button></form>
 		<form th:action="@{/homeCentroFormazione}" method="GET"><button type="submit">Gestione Centri Formazione</button></form>
 	</div>
 </body>

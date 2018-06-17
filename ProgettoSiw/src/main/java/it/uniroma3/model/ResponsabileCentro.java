@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Responsabile {
+public class ResponsabileCentro {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,16 +22,16 @@ public class Responsabile {
 	@Column(nullable = false)
 	private String password;
 
-	public Responsabile() {
+	public ResponsabileCentro() {
 	}
 
-	public Responsabile(String nome, String cognome, String email, String password) {
+	public ResponsabileCentro(String cognome, String nome, String email, String password) {
 		this.cognome = cognome;
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
 	}
-
+	
 	public boolean checkPassword(String email, String psw) {
 		return this.password.equals(psw) && this.email.equals(email);
 	}
@@ -62,16 +62,6 @@ public class Responsabile {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public CharSequence getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getRuolo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

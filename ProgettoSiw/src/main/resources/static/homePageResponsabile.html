@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <!--
 HomePage del Responsabile: qui il responsabile può scegliere se gestire le attività gestire nuovi allievi.
 
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HomeResponsabile</title>
@@ -62,9 +63,12 @@ HomePage del Responsabile: qui il responsabile può scegliere se gestire le atti
 				<div class="ebox1">
 					<span class="fa fa-pagelines"></span>
 					<div class="title">
-						<h2>Gestisci Allievi</h2>
-						<span class="byline"><a href="">Iscrivi Allievo</a>, <a
-							href="">Cerca dati Allievo/Lista Allievi del Centro</a> </span>
+						<h2>Gestisci Allievi</h2>...
+						
+							 <form th:action="@{/inserisciAllievo}"><button type="submit">Iscrivi Allievo</button></form>...
+							 <form th:action="@{/listaAllievi}"><button type="submit">Cerca dati Allievo/Lista Allievi del Centro</button></form>...
+							 <form th:action="@{/pagamento}"><button type="submit">Pagamenti</button></form> 
+						
 					</div>
 
 				</div>
@@ -76,10 +80,10 @@ HomePage del Responsabile: qui il responsabile può scegliere se gestire le atti
 				<div class="ebox2">
 					<span class="fa fa-anchor"></span>
 					<div class="title">
-						<h2>Gestisci Attività</h2>
-						<span class="byline"><a href="">Inserisci una nuova
-								Attività</a>, <a href="">Cerca una Attività/Lista Attività del
-								Centro. </a> </span>
+						<h2>Gestisci Attività</h2>...
+						
+							<form  th:action="@{/inserisciAttivita}"><button type="submit">Inserisci una nuova Attività </button></form>...
+							<form th:action="@{/listaAttivita}"><button type="submit">Cerca una Attività/Lista Attività del Centro. </button></form>
 					</div>
 
 				</div>

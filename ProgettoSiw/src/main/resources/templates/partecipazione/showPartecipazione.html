@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Partecipazione</title>
+</head>
+<body>
+	<h4>Dati Partecipazione Registrati</h4>
+	Allievo :
+	<div>
+		Nome : <span th:text="${allievo.nome}"></span>
+	</div>
+	<div>
+		Cognome : <span th:text="${allievo.cognome}"></span>
+	</div>
+	Attivita :
+	<div>
+		Descrizione : <span th:text="${attivita.descrizione}"></span>
+	</div>
+	<div>
+		Prezzo : <span th:text="${attivita.prezzo}"></span>
+	</div>
+	<div>
+		Data : <span th:text="${attivita.dataAttivita}"></span>
+	</div>
+	<div>
+		Ora Inizio : <span th:text="${attivita.oraInizio}"></span>
+	</div>
+	<div>
+		Ora Fine : <span th:text="${attivita.oraFine}"></span>
+	</div>
+	<div>
+		Centro Formazione : <span th:text="${attivita.centroFormazione}"></span>
+	</div>
+</body>
+</html>

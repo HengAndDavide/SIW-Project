@@ -1,0 +1,14 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Gestione Centri Formazione</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h4 class="title">Gestione Centri Formazione</h4>
+    <form th:action="@{/inserisciCentroFormazione}"><button type="submit">Inserisci Nuovo Centro Formazione</button></form>
+    <form th:action="@{/cercaCentroFormazione}"><button type="submit">Cerca Centro Formazione</button></form>
+    <form th:action="@{/listaCentriFormazione}"><button type="submit">Lista Tutti Centri Formazione</button></form>
+</body>
+</html>

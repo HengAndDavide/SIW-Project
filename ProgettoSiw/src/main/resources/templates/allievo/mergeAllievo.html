@@ -9,35 +9,41 @@
 	<div>
 		<h4 class="title">Allievo</h4>
 	</div>
-	<form th:action="@{'/updateAllievo' + '/' + ${allievoTrovato.id}}" method="POST" th:object="${allievoTrovato}">
+	<form th:action="@{'/updateAllievo' + '/' + ${allievo.id}}"
+		method="POST" th:object="${allievo}">
 		<table>
 			<tr>
 				<td>Nome :</td>
-				<td><input type="text" th:field="*{nome}"/></td>
+				<td><input type="text" th:field="*{nome}" /></td>
 				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></td>
 			</tr>
 			<tr>
 				<td>Cognome :</td>
-				<td><input type="text" th:field="*{cognome}"/></td>
+				<td><input type="text" th:field="*{cognome}" /></td>
 				<td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></td>
 			</tr>
 
 			<tr>
 				<td>Email :</td>
-				<td><input type="text" th:field="*{email}"/></td>
+				<td><input type="text" th:field="*{email}" /></td>
 				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
 			</tr>
-
+			<tr>
+				<td>Data di Nascita :</td>
+				<td><input type="date" th:field="*{dataNascita}" /></td>
+				<td th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}"></td>
+			</tr>
 			<tr>
 				<td>Telefono :</td>
-				<td><input type="text" th:field="*{telefono}"/></td>
+				<td><input type="text" th:field="*{telefono}" /></td>
 				<td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
 			</tr>
 
 			<tr>
 				<td>Luogo di Nascita :</td>
-				<td><input type="text" th:field="*{luogoNascita}"/></td>
-				<td th:if="${#fields.hasErrors('luogoNascita')}" th:errors="*{luogoNascita}"></td>
+				<td><input type="text" th:field="*{luogoNascita}" /></td>
+				<td th:if="${#fields.hasErrors('luogoNascita')}"
+					th:errors="*{luogoNascita}"></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Update Allievo</button></td>

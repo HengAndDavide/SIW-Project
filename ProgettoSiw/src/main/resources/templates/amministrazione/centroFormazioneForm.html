@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns="http://www.w3.org/1999/html">
 <head>
-<title>Inserimento Allievo</title>
+<title>Inserimento Centro Formazione</title>
 <meta charset="UTF-8">
 </head>
 <body>
 	<div>
-		<h4 class="title">Inserisci Allievo</h4>
+		<h4 class="title">Inserisci Nuovo Centro Formazione</h4>
 		<p th:text="${exists}"></p>
 	</div>
-	<form th:action="@{/saveAllievo}" method="POST" th:object="${allievo}">
+	<form th:action="@{/saveCentroFormazione}" method="POST" th:object="${centroFormazione}">
 		<table>
 			<tr>
 				<td>Nome :</td>
@@ -18,15 +18,9 @@
 				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></td>
 			</tr>
 			<tr>
-				<td>Cognome :</td>
-				<td><input type="text" th:field="*{cognome}" /></td>
-				<td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></td>
-			</tr>
-			<tr>
-				<td>Data di Nascita :</td>
-				<td><input type="date" th:field="*{dataNascita}" /></td>
-				<td th:if="${#fields.hasErrors('dataNascita')}"
-					th:errors="*{dataNascita}"></td>
+				<td>Indirizzo :</td>
+				<td><input type="text" th:field="*{indirizzo}" /></td>
+				<td th:if="${#fields.hasErrors('indirizzo')}" th:errors="*{indirizzo}"></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
@@ -39,20 +33,20 @@
 				<td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
 			</tr>
 			<tr>
-				<td>Luogo di Nascita :</td>
-				<td><input type="text" th:field="*{luogoNascita}" /></td>
-				<td th:if="${#fields.hasErrors('luogoNascita')}"
-					th:errors="*{luogoNascita}"></td>
+				<td>Capienza Massima :</td>
+				<td><input type="number" th:field="*{capienzaMassima}" /></td>
+				<td th:if="${#fields.hasErrors('capienzaMassima')}"
+					th:errors="*{capienzaMassima}"></td>
 			</tr>
+
 			<tr>
 				<td><br>
-					<button type="submit">Registra Allievo</button></td>
+				<button type="submit">Registra Centro Formazione</button></td>
 			</tr>
 		</table>
 	</form>
 	<br>
-	<form th:action="@{/homeAllievo}">
-		<button type="submit">Gestione Allievi</button>
+	<form th:action="@{/homeCentroFormazione}"><button type="submit">Gestione Centri Formazione</button>
 	</form>
 </body>
 </html>
