@@ -14,8 +14,7 @@ import it.uniroma3.service.CentroFormazioneService;
 
 @Controller
 public class AmmistrazioneController {
-
-	@Autowired
+	
 	private AmministrazioneService as;
 
 	@Autowired

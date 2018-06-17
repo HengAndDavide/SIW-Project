@@ -16,7 +16,6 @@ import it.uniroma3.model.CentroFormazione;
 
 public class AmministrazioneService {
 
-	@Autowired
 	private CentroFormazioneService centroFormazioneService;
 
 	private List<CentroFormazione> centri = this.centroFormazioneService.findAll();
