@@ -108,7 +108,7 @@ public class AttivitaController {
 
 	@RequestMapping("/listaAttivita")
 	public String listaAttivita(Model model) {
-		model.addAttribute("listaAttivita", this.attivitaService.findAll());
+		model.addAttribute("listaAttivita", this.attivitaService.findByCentroFormazione(this.cf));
 		return "attivita/attivitaList";
 	}
 

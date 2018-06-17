@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
+import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.model.Partecipazione;
 import it.uniroma3.repository.AttivitaRepository;
 import it.uniroma3.repository.PartecipazioneRepository;
@@ -33,7 +34,7 @@ public class AttivitaService {
 		else
 			return null;
 	}
-	
+
 	public Attivita findByDescrizione(String descrizione) {
 		Optional<Attivita> attivita = this.attivitaRepository.findByDescrizione(descrizione);
 		if (attivita.isPresent())
@@ -51,8 +52,13 @@ public class AttivitaService {
 			return null;
 	}
 
-	public List<Attivita> findAll() {
-		return (List<Attivita>) this.attivitaRepository.findAll();
+	public List<Attivita> findByCentroFormazione(CentroFormazione cf) {
+		List<Attivita> listaAttivita = new ArrayList<>();
+		if (cf != null)
+			listaAttivita = this.attivitaRepository.findByCentroFormazione(cf);
+		else
+			listaAttivita = this.attivitaRepository.findAll();
+		return listaAttivita;
 	}
 
 	public void uploadParametri(Attivita attivita) {
@@ -76,14 +82,17 @@ public class AttivitaService {
 	}
 
 	public List<Attivita> getListaAttivitaPossibili(Allievo allievoCorrente) {
+		
 		List<Partecipazione> listaPAllievo = allievoCorrente.getListaPartecipazione();
-		List<Partecipazione> listaPartecipazioni = (List<Partecipazione>) this.pr.findAll();
-		List<Attivita> listaAttivita = new ArrayList<>();
-		for (Partecipazione p : listaPartecipazioni) {
-			if (!listaPAllievo.contains(p))
-				listaAttivita.add(p.getAttivita());
+		List<Attivita> listaAttA = new ArrayList<>();
+		for (Partecipazione p : listaPAllievo) {
+			listaAttA.add(p.getAttivita());
 		}
-		return listaAttivita;
+		List<Attivita> listaAttivitaPossibili = this.attivitaRepository.findAll();
+		for (Attivita a : listaAttA) {
+			listaAttivitaPossibili.remove(a);
+		}
+		return listaAttivitaPossibili;
 	}
 
 	// Metodi persistence
@@ -91,7 +100,8 @@ public class AttivitaService {
 		return this.attivitaRepository.save(attivita);
 	}
 
-	public Attivita update(Attivita attivita, String descrizione, Double prezzo, Date dataAttivita, Date oraInizio, Date oraFine) {
+	public Attivita update(Attivita attivita, String descrizione, Double prezzo, Date dataAttivita, Date oraInizio,
+			Date oraFine) {
 		attivita.setDescrizione(descrizione);
 		attivita.setPrezzo(prezzo);
 		attivita.setDataAttivita(dataAttivita);

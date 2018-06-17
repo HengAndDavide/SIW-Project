@@ -49,7 +49,7 @@ public class Progetto2018Application {
 		allievo.setTelefono("065432");
 		allievo.setLuogoNascita("Cina");
 		allievoService.save(allievo);
-		
+
 		Responsabile r = new Responsabile();
 		r.setUsername("admin");
 		r.setPassword("admin");
@@ -72,12 +72,12 @@ public class Progetto2018Application {
 		this.r.save(r);
 
 		Attivita attivita = new Attivita();
-		attivita.setDescrizione("Calcio");
-		attivita.setPrezzo(150);
+		attivita.setDescrizione("Pittura");
+		attivita.setPrezzo(70);
 		attivita.setDataAttivita(new Date());
 		attivita.setCentroFormazione(centroFormazione);
 		attivitaService.save(attivita);
-
+		
 		centroFormazione = new CentroFormazione();
 		centroFormazione.setNome("Sportivo");
 		centroFormazione.setEmail("sportivo@centro.it");
@@ -92,10 +92,10 @@ public class Progetto2018Application {
 		r.setRole("responsabile");
 		r.setCentroFormazione(centroFormazione);
 		this.r.save(r);
-
+		
 		attivita = new Attivita();
-		attivita.setDescrizione("Pittura");
-		attivita.setPrezzo(70);
+		attivita.setDescrizione("Calcio");
+		attivita.setPrezzo(150);
 		attivita.setDataAttivita(new Date());
 		attivita.setCentroFormazione(centroFormazione);
 		attivitaService.save(attivita);

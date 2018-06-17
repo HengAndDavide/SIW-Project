@@ -51,6 +51,7 @@ public class PartecipazioneController {
 	public String savePartecipazione(Model model) {
 		Partecipazione partecipazione = new Partecipazione(this.allievoCorrente, this.attivitaCorrente);
 		this.ps.save(partecipazione);
+		this.allievoCorrente.getListaPartecipazione().add(partecipazione);
 		model.addAttribute("allievo", this.allievoCorrente);
 		return "allievo/showAllievo";
 	}
