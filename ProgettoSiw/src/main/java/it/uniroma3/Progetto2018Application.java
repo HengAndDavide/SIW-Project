@@ -1,27 +1,24 @@
 package it.uniroma3;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
 import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.model.Responsabile;
-import it.uniroma3.model.Role;
 import it.uniroma3.service.AllievoService;
 import it.uniroma3.service.AttivitaService;
 import it.uniroma3.service.CentroFormazioneService;
 import it.uniroma3.service.ResponsabileService;
-import it.uniroma3.service.RoleService;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class Progetto2018Application {
 
 	@Autowired
@@ -36,23 +33,12 @@ public class Progetto2018Application {
 	@Autowired
 	private CentroFormazioneService CentroFormazioneService;
 
-	@Autowired
-	private RoleService roleService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(Progetto2018Application.class, args);
 	}
 
 	@PostConstruct
 	public void init() {
-
-		Role role = new Role();
-		role.setRole("admin");
-		roleService.save(role);
-
-		role = new Role();
-		role.setRole("responsabile");
-		roleService.save(role);
 
 		Date data = new Date();
 		Allievo allievo = new Allievo();
@@ -63,6 +49,12 @@ public class Progetto2018Application {
 		allievo.setTelefono("065432");
 		allievo.setLuogoNascita("Cina");
 		allievoService.save(allievo);
+		
+		Responsabile r = new Responsabile();
+		r.setUsername("admin");
+		r.setPassword("admin");
+		r.setRole("admin");
+		this.r.save(r);
 
 		CentroFormazione centroFormazione = new CentroFormazione();
 		centroFormazione.setNome("Artistico");
@@ -71,6 +63,13 @@ public class Progetto2018Application {
 		centroFormazione.setTelefono("06453453");
 		centroFormazione.setCapienzaMassima(30);
 		this.CentroFormazioneService.save(centroFormazione);
+		
+		r = new Responsabile();
+		r.setUsername("rArte");
+		r.setPassword("arte");
+		r.setRole("responsabile");
+		r.setCentroFormazione(centroFormazione);
+		this.r.save(r);
 
 		Attivita attivita = new Attivita();
 		attivita.setDescrizione("Calcio");
@@ -87,10 +86,10 @@ public class Progetto2018Application {
 		centroFormazione.setCapienzaMassima(300);
 		this.CentroFormazioneService.save(centroFormazione);
 
-		Responsabile r = new Responsabile();
-		r.setUsername("admi");
-		r.setPassword("admin");
-		r.setRole(role);
+		r = new Responsabile();
+		r.setUsername("rSport");
+		r.setPassword("sport");
+		r.setRole("responsabile");
 		r.setCentroFormazione(centroFormazione);
 		this.r.save(r);
 

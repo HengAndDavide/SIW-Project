@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.controller.MainController;
 import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
 import it.uniroma3.model.Partecipazione;
@@ -26,13 +25,10 @@ public class AttivitaService {
 	@Autowired
 	private PartecipazioneRepository pr;
 
-	@Autowired
-	private MainController mainController;
-
 	// Metodi di ricerca
 	public Attivita findById(Long id) {
 		Optional<Attivita> attivita = this.attivitaRepository.findById(id);
-		if (attivita.isPresent() && veroCentro(attivita.get()))
+		if (attivita.isPresent())
 			return attivita.get();
 		else
 			return null;
@@ -57,11 +53,6 @@ public class AttivitaService {
 
 	public List<Attivita> findAll() {
 		return (List<Attivita>) this.attivitaRepository.findAll();
-	}
-
-	// Metodi di supporto
-	public boolean veroCentro(Attivita attivita) {
-		return attivita.getCentroFormazione() == this.mainController.getCentroFormazione();
 	}
 
 	public void uploadParametri(Attivita attivita) {

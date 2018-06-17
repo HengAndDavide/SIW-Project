@@ -11,10 +11,12 @@
 		<div>
 			<form name="f" th:action="@{/login2}" method="get">
 				<div>
-					<label>Email : <input type="text" name="email" /></label>
+					<label>Email : <input type="text" name="username" /><span
+						th:text=" ${errorParam}"></span></label>
 				</div>
 				<div>
-					<label>Password: <input type="password" name="password" /></label>
+					<label>Password: <input type="password" name="password" /><span
+						th:text=" ${errorParam}"></span></label>
 				</div>
 				<button type="submit" class="btn">Log in</button>
 			</form>

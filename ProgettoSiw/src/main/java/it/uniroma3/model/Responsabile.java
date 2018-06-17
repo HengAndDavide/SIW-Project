@@ -1,13 +1,10 @@
 package it.uniroma3.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,26 +27,14 @@ public class Responsabile {
 	private String username;
 	@Column(name = "password")
 	private String password;
+	@Column(name = "role")
+	private String role;
 
 	@OneToOne
 	private CentroFormazione centroFormazione;
 
-	@OneToOne()
-	private Role role;
 
 	public Responsabile() {
-	}
-
-	public Responsabile(Responsabile responsabile) {
-
-		this.email = responsabile.email;
-		this.id = responsabile.id;
-		this.nome = responsabile.nome;
-		this.cognome = responsabile.cognome;
-		this.username = responsabile.username;
-		this.password = responsabile.password;
-		this.role = responsabile.role;
-
 	}
 
 	public int getId() {
@@ -84,11 +69,11 @@ public class Responsabile {
 		this.password = password;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

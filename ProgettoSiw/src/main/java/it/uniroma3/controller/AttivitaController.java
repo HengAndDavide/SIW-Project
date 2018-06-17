@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.controller.validator.AttivitaValidator;
 import it.uniroma3.model.Attivita;
+import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.service.AttivitaService;
 
 @Controller
@@ -26,9 +27,8 @@ public class AttivitaController {
 
 	@Autowired
 	private AttivitaValidator validator;
-
-	@Autowired
-	private MainController mainController;
+	
+	private CentroFormazione cf;
 
 	@RequestMapping("/homeAttivita")
 	public String homeAttivita() {
@@ -51,6 +51,7 @@ public class AttivitaController {
 				model.addAttribute("exists", "Attivita esiste gia'");
 				return "attivita/attivitaForm";
 			} else {
+				attivita.setCentroFormazione(cf);
 				this.attivitaService.save(attivita);
 				model.addAttribute("attivita", attivita);
 				return "attivita/showAttivita";
@@ -69,12 +70,12 @@ public class AttivitaController {
 
 		if (!descrizione.equals("") && descrizione != null) {
 			descrizione = this.attivitaService.uploadString(descrizione);
-			Attivita attivitaTrovata = this.attivitaService.findByDescrizione(descrizione);
-			if (attivitaTrovata == null) {
+			Attivita attivita = this.attivitaService.findByDescrizione(descrizione);
+			if (attivita == null) {
 				model.addAttribute("notexists", "Attivita non esiste");
 				return "attivita/findAttivita";
 			} else {
-				model.addAttribute("attivita", attivitaTrovata);
+				model.addAttribute("attivita", attivita);
 				return "attivita/showAttivita";
 			}
 		}
@@ -115,6 +116,14 @@ public class AttivitaController {
 	public String cancelllaAttivita(@PathVariable("id") Long id, Model model) {
 		this.attivitaService.delete(id);
 		return "attivita/deleteAttivita";
+	}
+
+	public CentroFormazione getCf() {
+		return cf;
+	}
+
+	public void setCf(CentroFormazione cf) {
+		this.cf = cf;
 	}
 
 }
