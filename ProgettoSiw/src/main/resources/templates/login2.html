@@ -8,6 +8,9 @@
 	<div>
 		<h2>Accedi</h2>
 		<p th:text="${noEsiste}" />
+		<p th:text="${NoLogin}" />
+		<p th:text="${logout}" />
+		
 		<div>
 			<form name="f" th:action="@{/login2}" method="get">
 				<div>

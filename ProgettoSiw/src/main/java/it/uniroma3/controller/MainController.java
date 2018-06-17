@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.model.Responsabile;
+import it.uniroma3.service.AttivitaService;
 import it.uniroma3.service.CentroFormazioneService;
 import it.uniroma3.service.MainService;
 import it.uniroma3.service.ResponsabileService;
@@ -23,13 +24,25 @@ public class MainController {
 	private CentroFormazioneService cs;
 	
 	@Autowired
+	private AttivitaController ac;
+	
+	@Autowired
 	private MainService ms;
 
 	@Autowired
 	private ResponsabileService r;
+	
+	private Responsabile rsc;
 
 	@GetMapping("/login")
-	public String home() {
+	public String login() {
+		return "login2";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(Model model) {
+		this.ac.setCf(null);
+		model.addAttribute("logout", "Fatto Logout");
 		return "login2";
 	}
 
@@ -42,7 +55,8 @@ public class MainController {
 				model.addAttribute("noEsiste", "Dati Errati");
 				return "login2";
 			} else {
-				return this.ms.gestisci(responsabile.get());
+				this.rsc = responsabile.get();
+				return this.ms.gestisci(this.rsc);
 			}
 		}
 		model.addAttribute("errorParam", "Inserisci Dati");
@@ -52,11 +66,6 @@ public class MainController {
 	@RequestMapping("/contatti")
 	public String contatti() {
 		return "contatti";
-	}
-
-	@RequestMapping("/admin/amministrazione")
-	public String amministrazione() {
-		return "amministrazione";
 	}
 
 	// // Setta CentroFormazione
@@ -77,5 +86,13 @@ public class MainController {
 	// this.getCentroFormazione().getNome());
 	// return "/listaCentri/" + this.centroFormazione.getNome().toString();
 	// }
+	
+	public Responsabile getRsc() {
+		return rsc;
+	}
+
+	public void setRsc(Responsabile rsc) {
+		this.rsc = rsc;
+	}
 
 }

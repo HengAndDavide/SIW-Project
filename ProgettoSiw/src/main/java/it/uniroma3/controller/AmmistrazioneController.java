@@ -16,14 +16,17 @@ import it.uniroma3.service.CentroFormazioneService;
 public class AmmistrazioneController {
 
 	@Autowired
-	private CentroFormazioneService centroFormazioneService;
-
 	private AmministrazioneService as;
 
-	private CentroFormazione cf;
+	@Autowired
+	private MainController mc;
 
 	@RequestMapping("/amministrazione")
-	public String amministrazione() {
+	public String amministrazione(Model model) {
+		if (!this.mc.getRsc().getRole().equals("admin")) {
+			model.addAttribute("NoAdmin", "Prima devi fare Login come Amministratore");
+			return "login2";
+		}
 		return "amministrazione/amministrazione";
 	}
 
