@@ -15,7 +15,7 @@
 				<th>Scegli tra le Attivita :</th>
 			</tr>
 			<tr th:each="attivita : ${listaAttivita}">
-				<td><a th:href="@{'/findAttivitaId' + '/' + ${attivita.id}}">
+				<td><a th:href="@{'/confermaPartecipazione' + '/' + ${attivita.id}}">
 						<span th:text="${attivita.descrizione}"></span> 
 						Il <span th:text="${attivita.dataAttivita}"></span>
 						Dalle <span th:text="${attivita.oraInizio}"></span> 

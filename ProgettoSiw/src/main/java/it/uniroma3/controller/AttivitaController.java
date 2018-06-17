@@ -1,5 +1,7 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.controller.validator.AttivitaValidator;
 import it.uniroma3.model.Attivita;
+import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.service.AttivitaService;
 
 @Controller
@@ -24,9 +27,8 @@ public class AttivitaController {
 
 	@Autowired
 	private AttivitaValidator validator;
-
-	@Autowired
-	private MainController mainController;
+	
+	private CentroFormazione cf;
 
 	@RequestMapping("/homeAttivita")
 	public String homeAttivita() {
@@ -49,8 +51,9 @@ public class AttivitaController {
 				model.addAttribute("exists", "Attivita esiste gia'");
 				return "attivita/attivitaForm";
 			} else {
-				this.attivitaService.save(attivita, mainController.getCentroFormazione());
-				model.addAttribute("attivitaTrovata", attivita);
+				attivita.setCentroFormazione(cf);
+				this.attivitaService.save(attivita);
+				model.addAttribute("attivita", attivita);
 				return "attivita/showAttivita";
 			}
 		}
@@ -63,16 +66,16 @@ public class AttivitaController {
 	}
 
 	@RequestMapping(value = "/findAttivita")
-	public String findAttivita(@RequestParam("descrizione") String descrizione, Model model) {
+	public String findAttivita(@RequestParam("descrizione") String descrizione,	Model model) {
 
 		if (!descrizione.equals("") && descrizione != null) {
-			this.attivitaService.uploadString(descrizione);
-			Attivita attivitaTrovato = this.attivitaService.findByDescrizione(descrizione);
-			if (attivitaTrovato == null) {
+			descrizione = this.attivitaService.uploadString(descrizione);
+			Attivita attivita = this.attivitaService.findByDescrizione(descrizione);
+			if (attivita == null) {
 				model.addAttribute("notexists", "Attivita non esiste");
 				return "attivita/findAttivita";
 			} else {
-				model.addAttribute("attivitaTrovato", attivitaTrovato);
+				model.addAttribute("attivita", attivita);
 				return "attivita/showAttivita";
 			}
 		}
@@ -82,29 +85,30 @@ public class AttivitaController {
 
 	@RequestMapping(value = "/findAttivitaId/{id}", method = RequestMethod.GET)
 	public String findAttivita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("attivitaTrovata", this.attivitaService.findById(id));
+		model.addAttribute("attivita", this.attivitaService.findById(id));
 		return "attivita/showAttivita";
 	}
 
 	@RequestMapping(value = "/modificaAttivita/{id}", method = RequestMethod.GET)
 	public String modificaAttivita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("attivitaTrovato", this.attivitaService.findById(id));
+		model.addAttribute("attivita", this.attivitaService.findById(id));
 		return "attivita/mergeAttivita";
 	}
 
 	@RequestMapping(value = "/updateAttivita/{id}", method = RequestMethod.POST)
 	public String updateAttivita(@PathVariable("id") Long id, @RequestParam("descrizione") String decrizione,
-			@RequestParam("prezzo") Double prezzo, Model model) {
-		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo);
+			@RequestParam("prezzo") Double prezzo, @RequestParam("dataAttivita") Date dataAttivita,
+			@RequestParam("oraInizio") Date oraInizio, @RequestParam("oraFine") Date oraFine, Model model) {
+		Attivita attivita = this.attivitaService.update(this.attivitaService.findById(id), decrizione, prezzo, dataAttivita, oraInizio, oraFine);
 		this.attivitaService.uploadParametri(attivita);
-		this.attivitaService.save(attivita, mainController.getCentroFormazione());
-		model.addAttribute("attivitaTrovata", attivita);
+		this.attivitaService.save(attivita);
+		model.addAttribute("attivita", attivita);
 		return "attivita/showAttivita";
 	}
 
 	@RequestMapping("/listaAttivita")
 	public String listaAttivita(Model model) {
-		model.addAttribute("listaAttivita", this.attivitaService.findAll());
+		model.addAttribute("listaAttivita", this.attivitaService.findByCentroFormazione(this.cf));
 		return "attivita/attivitaList";
 	}
 
@@ -112,6 +116,14 @@ public class AttivitaController {
 	public String cancelllaAttivita(@PathVariable("id") Long id, Model model) {
 		this.attivitaService.delete(id);
 		return "attivita/deleteAttivita";
+	}
+
+	public CentroFormazione getCf() {
+		return cf;
+	}
+
+	public void setCf(CentroFormazione cf) {
+		this.cf = cf;
 	}
 
 }

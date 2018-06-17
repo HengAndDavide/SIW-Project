@@ -16,8 +16,4 @@ public interface CentroFormazioneRepository extends CrudRepository<CentroFormazi
 	
 	public Optional<CentroFormazione> findByEmail(String email);
 	
-	public Optional<CentroFormazione> findByNomeAndEmail(String nome, String email);
-	
-	public Optional<CentroFormazione> findByNomeAndEmailAndIndirizzo(String nome, String email, String indirizzo);
-	
 }

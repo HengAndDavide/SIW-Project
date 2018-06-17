@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.model.Allievo;
 import it.uniroma3.model.CentroFormazione;
 import it.uniroma3.repository.CentroFormazioneRepository;
 
@@ -42,31 +43,6 @@ public class CentroFormazioneService {
 			return null;
 	}
 
-	public CentroFormazione findByEmail(String email) {
-		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByEmail(email);
-		if (centroFormazione.isPresent())
-			return centroFormazione.get();
-		else
-			return null;
-	}
-
-	public CentroFormazione findByNomeAndEmail(String nome, String email) {
-		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByNomeAndEmail(nome, email);
-		if (centroFormazione.isPresent())
-			return centroFormazione.get();
-		else
-			return null;
-	}
-
-	public CentroFormazione findByNomeAndEmailAndIndirizzo(String nome, String email, String indirizzo) {
-		Optional<CentroFormazione> centroFormazione = this.centroRepository.findByNomeAndEmailAndIndirizzo(nome, email,
-				indirizzo);
-		if (centroFormazione.isPresent())
-			return centroFormazione.get();
-		else
-			return null;
-	}
-
 	public List<CentroFormazione> findAll() {
 		return (List<CentroFormazione>) this.centroRepository.findAll();
 	}
@@ -96,8 +72,7 @@ public class CentroFormazioneService {
 		else
 			return false;
 	}
-
-	// Persistence
+	
 	public CentroFormazione save(CentroFormazione centroFormazione) {
 		return this.centroRepository.save(centroFormazione);
 	}
@@ -111,7 +86,7 @@ public class CentroFormazioneService {
 		CentroFormazioneTrovato.setCapienzaMassima(capienzaMassima);
 		return CentroFormazioneTrovato;
 	}
-
+	
 	public void delete(Long id) {
 		this.centroRepository.deleteById(id);
 	}

@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Allievo {
@@ -25,8 +26,9 @@ public class Allievo {
 	@Column(nullable = false)
 	private String cognome;
 
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd-MMM-YYYY")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date dataNascita;
 
 	@Column(nullable = false, unique = true)
@@ -44,36 +46,13 @@ public class Allievo {
 	public Allievo() {
 	}
 
-	public Allievo(String nome, String cognome) {
+	public Allievo(String nome, String cognome, Date dataNascita, String email, String telefono, String luogoNascita) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-	}
-
-	public Allievo(String nome, String cognome, String email, String telefono, String luogoNascita) {
-		super();
-		this.nome = nome;
-		this.cognome = cognome;
-		this.email = email;
-		this.telefono = telefono;
-		this.luogoNascita = luogoNascita;
-	}
-
-	public Allievo(String nome, String cognome, String email, String luogoNascita) {
-		super();
-		this.nome = nome;
-		this.cognome = cognome;
-		this.email = email;
-		this.luogoNascita = luogoNascita;
-	}
-
-	public Allievo(String nome, String cognome, String email, String telefono, Date dataNascita, String luogoNascita) {
-		super();
-		this.nome = nome;
-		this.cognome = cognome;
-		this.email = email;
-		this.telefono = telefono;
 		this.dataNascita = dataNascita;
+		this.email = email;
+		this.telefono = telefono;
 		this.luogoNascita = luogoNascita;
 	}
 

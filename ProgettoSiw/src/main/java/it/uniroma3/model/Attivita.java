@@ -1,5 +1,6 @@
 package it.uniroma3.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Attivita {
@@ -21,6 +26,17 @@ public class Attivita {
 	@Column(nullable = false)
 	private double prezzo;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date dataAttivita;
+
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date oraInizio;
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date oraFine;
+
 	@ManyToOne
 	private CentroFormazione centroFormazione;
 
@@ -28,19 +44,6 @@ public class Attivita {
 	private List<Partecipazione> listaPartecipazioni;
 
 	public Attivita() {
-	}
-
-	public Attivita(String descrizione, double prezzo) {
-		super();
-		this.descrizione = descrizione;
-		this.prezzo = prezzo;
-	}
-
-	public Attivita(String descrizione, double prezzo, CentroFormazione centroFormazione) {
-		super();
-		this.descrizione = descrizione;
-		this.prezzo = prezzo;
-		this.centroFormazione = centroFormazione;
 	}
 
 	public String getDescrizione() {
@@ -77,6 +80,30 @@ public class Attivita {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Date getOraInizio() {
+		return oraInizio;
+	}
+
+	public void setOraInizio(Date oraInizio) {
+		this.oraInizio = oraInizio;
+	}
+
+	public Date getOraFine() {
+		return oraFine;
+	}
+
+	public void setOraFine(Date oraFine) {
+		this.oraFine = oraFine;
+	}
+	
+	public Date getDataAttivita() {
+		return dataAttivita;
+	}
+
+	public void setDataAttivita(Date dataAttivita) {
+		this.dataAttivita = dataAttivita;
 	}
 
 }

@@ -1,5 +1,7 @@
 package it.uniroma3.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.controller.MainController;
+import it.uniroma3.model.Allievo;
 import it.uniroma3.model.Attivita;
 import it.uniroma3.model.CentroFormazione;
+import it.uniroma3.model.Partecipazione;
 import it.uniroma3.repository.AttivitaRepository;
+import it.uniroma3.repository.PartecipazioneRepository;
 
 @Transactional
 @Service
@@ -20,12 +24,12 @@ public class AttivitaService {
 	private AttivitaRepository attivitaRepository;
 
 	@Autowired
-	private MainController mainController;
+	private PartecipazioneRepository pr;
 
 	// Metodi di ricerca
 	public Attivita findById(Long id) {
 		Optional<Attivita> attivita = this.attivitaRepository.findById(id);
-		if (attivita.isPresent() && veroCentro(attivita.get()))
+		if (attivita.isPresent())
 			return attivita.get();
 		else
 			return null;
@@ -39,13 +43,22 @@ public class AttivitaService {
 			return null;
 	}
 
-	public List<Attivita> findAll() {
-		return (List<Attivita>) this.attivitaRepository.findAll();
+	public Attivita findByDescrizioneAndOraInizioAndOraFine(String descrizione, Date oraInizio, Date oraFine) {
+		Optional<Attivita> attivita = this.attivitaRepository.findByDescrizioneAndOraInizioAndOraFine(descrizione,
+				oraInizio, oraFine);
+		if (attivita.isPresent())
+			return attivita.get();
+		else
+			return null;
 	}
 
-	// Metodi di supporto
-	public boolean veroCentro(Attivita attivita) {
-		return attivita.getCentroFormazione() == this.mainController.getCentroFormazione();
+	public List<Attivita> findByCentroFormazione(CentroFormazione cf) {
+		List<Attivita> listaAttivita = new ArrayList<>();
+		if (cf != null)
+			listaAttivita = this.attivitaRepository.findByCentroFormazione(cf);
+		else
+			listaAttivita = this.attivitaRepository.findAll();
+		return listaAttivita;
 	}
 
 	public void uploadParametri(Attivita attivita) {
@@ -63,23 +76,38 @@ public class AttivitaService {
 	}
 
 	public boolean alreadyExists(Attivita attivita) {
-		Optional<Attivita> attivitaTrovata = this.attivitaRepository.findByDescrizione(attivita.getDescrizione());
-		if (attivitaTrovata.isPresent())
-			return true;
-		else
-			return false;
+		Optional<Attivita> attivitaTrovata = this.attivitaRepository.findByDescrizioneAndOraInizioAndOraFine(
+				attivita.getDescrizione(), attivita.getOraInizio(), attivita.getOraFine());
+		return attivitaTrovata.isPresent();
+	}
+
+	public List<Attivita> getListaAttivitaPossibili(Allievo allievoCorrente) {
+		
+		List<Partecipazione> listaPAllievo = allievoCorrente.getListaPartecipazione();
+		List<Attivita> listaAttA = new ArrayList<>();
+		for (Partecipazione p : listaPAllievo) {
+			listaAttA.add(p.getAttivita());
+		}
+		List<Attivita> listaAttivitaPossibili = this.attivitaRepository.findAll();
+		for (Attivita a : listaAttA) {
+			listaAttivitaPossibili.remove(a);
+		}
+		return listaAttivitaPossibili;
 	}
 
 	// Metodi persistence
-	public Attivita save(Attivita attivita, CentroFormazione centroFormazione) {
-		attivita.setCentroFormazione(centroFormazione);
+	public Attivita save(Attivita attivita) {
 		return this.attivitaRepository.save(attivita);
 	}
 
-	public Attivita update(Attivita attivitaTrovata, String descrizione, Double prezzo) {
-		attivitaTrovata.setDescrizione(descrizione);
-		attivitaTrovata.setPrezzo(prezzo);
-		return attivitaTrovata;
+	public Attivita update(Attivita attivita, String descrizione, Double prezzo, Date dataAttivita, Date oraInizio,
+			Date oraFine) {
+		attivita.setDescrizione(descrizione);
+		attivita.setPrezzo(prezzo);
+		attivita.setDataAttivita(dataAttivita);
+		attivita.setOraInizio(oraInizio);
+		attivita.setOraFine(oraFine);
+		return attivita;
 	}
 
 	public void delete(Long id) {

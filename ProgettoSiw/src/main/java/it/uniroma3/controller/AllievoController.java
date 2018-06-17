@@ -1,5 +1,8 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.controller.validator.AllievoValidator;
 import it.uniroma3.model.Allievo;
+import it.uniroma3.model.Attivita;
 import it.uniroma3.service.AllievoService;
+import it.uniroma3.service.PartecipazioneService;
 
 @Controller
 public class AllievoController {
 
 	@Autowired
 	private AllievoService allievoService;
+	
+	@Autowired
+	private PartecipazioneService ps;
 
 	@Autowired
 	private AllievoValidator validator;
+	
+	@RequestMapping("/pagamento")
+	public String pagamento() {
+		return "allievo/findAllievo";
+	}
 
 	@RequestMapping("/homeAllievo")
 	public String homeAllievo() {
@@ -49,7 +62,9 @@ public class AllievoController {
 				return "allievo/allievoForm";
 			} else {
 				this.allievoService.save(allievo);
-				model.addAttribute("allievoTrovato", allievo);
+				model.addAttribute("allievo", allievo);
+				List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+				model.addAttribute("listaAttivita", listaAttivita);
 				return "allievo/showAllievo";
 			}
 		}
@@ -68,13 +83,15 @@ public class AllievoController {
 
 		if (!email.equals("") && email != null) {
 
-			Allievo allievoTrovato = this.allievoService.findByEmail(email.toLowerCase());
+			Allievo allievo = this.allievoService.findByEmail(email.toLowerCase());
 
-			if (allievoTrovato == null) {
+			if (allievo == null) {
 				model.addAttribute("notexists", "Allievo non esiste");
 				return "allievo/findAllievo";
 			} else {
-				model.addAttribute("allievoTrovato", allievoTrovato);
+				List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+				model.addAttribute("listaAttivita", listaAttivita);
+				model.addAttribute("allievo", allievo);
 				return "allievo/showAllievo";
 			}
 		}
@@ -85,14 +102,17 @@ public class AllievoController {
 	// Search Allievo tramite ID
 	@RequestMapping(value = "/findAllievoId/{id}", method = RequestMethod.GET)
 	public String findAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
+		Allievo allievo = this.allievoService.findById(id);
+		model.addAttribute("allievo", allievo);
+		List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+		model.addAttribute("listaAttivita", listaAttivita);
 		return "allievo/showAllievo";
 	}
 
 	// Modifica Allievo tramite id Supporto
 	@RequestMapping(value = "/modificaAllievo/{id}", method = RequestMethod.GET)
 	public String modificaAllievo(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("allievoTrovato", this.allievoService.findById(id));
+		model.addAttribute("allievo", this.allievoService.findById(id));
 		return "allievo/mergeAllievo";
 	}
 
@@ -100,12 +120,16 @@ public class AllievoController {
 	@RequestMapping(value = "/updateAllievo/{id}", method = RequestMethod.POST)
 	public String updateAllievo(@PathVariable("id") Long id, @RequestParam("nome") String nome,
 			@RequestParam("cognome") String cognome, @RequestParam("email") String email,
-			@RequestParam("telefono") String telefono, @RequestParam("luogoNascita") String luogoNascita, Model model) {
-		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), nome, cognome, email,
-				telefono, luogoNascita);
+			@RequestParam("dataNascita") Date dataNascita, @RequestParam("telefono") String telefono,
+			@RequestParam("luogoNascita") String luogoNascita, Model model) {
+		Allievo allievo = this.allievoService.update(this.allievoService.findById(id), 
+				nome, cognome, email,
+				dataNascita, telefono, luogoNascita);
 		this.allievoService.uploadParametri(allievo);
 		this.allievoService.save(allievo);
-		model.addAttribute("allievoTrovato", allievo);
+		model.addAttribute("allievo", allievo);
+		List<Attivita> listaAttivita = this.ps.getAttivita(allievo.getListaPartecipazione());
+		model.addAttribute("listaAttivita", listaAttivita);
 		return "allievo/showAllievo";
 	}
 

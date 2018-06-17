@@ -8,6 +8,8 @@ import it.uniroma3.model.Responsabile;
 
 public interface ResponsabileRepository extends CrudRepository<Responsabile, Long> {
 
-	public Optional<Responsabile> findByEmail(String email);
+	public Optional<Responsabile> findByUsername(String username);
+
+	public Optional<Responsabile> findByUsernameAndPassword(String username, String password);
 
 }
