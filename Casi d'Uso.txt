@@ -20,8 +20,6 @@ Due utenti:responsabili del centro,gestore del centro(non allievo).
 			3.1 Vengono visualizzate una lista di attivita sottoscrivibile dall'utente 
 				(quelle a cui è gia iscritto non vengono visualizzate).
 		4. Il Responsabile iscrive l' Allievo all' Attività scelta.
-			(4.1 Se l' Allievo scegli un' Attività che va in conflitto (Orario) 
-				con un'altro scelto in precedenza, il sistema manda un messaggio errore.)
 
 	UC 3 : Gestione Attività Azienda - Attore Primario : Direttore
 		1. Il Direttore accede al sistema e crea una nuova Attività
